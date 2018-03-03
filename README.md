@@ -1,2 +1,2 @@
-# -Virtual-Judge
-My codes for Virtual Judge
+My codes for Virtual Judge and leetcode
+
