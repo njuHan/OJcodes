@@ -4,6 +4,7 @@
 #include <map>
 #include <set>
 #include <vector>
+#include <queue>
 using namespace std;
 
 struct ListNode
@@ -13,11 +14,24 @@ struct ListNode
 	ListNode(int x) :val(x), next(NULL) {}
 };
 
+// 仿函数
+struct cmp
+{
+	//若A的优先级比B的小，返回true
+	bool operator() (const ListNode* A, const ListNode*	B) const
+	{
+		//val 小的优先级大
+		if (A->val > B->val)
+			return true;
+		return false;
+	}
+};
+
 struct RandomListNode {
 	int label;
 	RandomListNode *next, *random;
 	RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
-	
+
 };
 
 class Solution
@@ -39,7 +53,7 @@ public:
 	//方法2 头插法
 	ListNode* reverseList2(ListNode* head)
 	{
-		ListNode* next,*p;
+		ListNode* next;
 		ListNode temp_head(0);
 		temp_head.next = NULL;
 		while (head)
@@ -51,14 +65,14 @@ public:
 		}
 		return temp_head.next;
 	}
-	
+
 	//使用头插法
 	ListNode* reverseMN(ListNode* head, int m, int n)
 	{
 		ListNode temp_head(0);
 		temp_head.next = head;
 		ListNode *pre_pm = &temp_head;
-		ListNode *pm = head, *pn=head;
+		ListNode *pm = head, *pn = head;
 		for (int i = m; i > 1; i--)
 		{
 			pre_pm = pre_pm->next;
@@ -84,7 +98,7 @@ public:
 		ListNode temp_head(0);
 		temp_head.next = head;
 		ListNode* pre_pm = &temp_head;
-		ListNode* pm=head, *pn = head, *next_pn;
+		ListNode* pm = head, *pn = head, *next_pn;
 		for (int i = m; i > 1; i--)
 		{
 			pm = pm->next;
@@ -130,7 +144,7 @@ public:
 		return temp_head.next;
 	}
 
-	ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) 
+	ListNode *getIntersectionNode(ListNode *headA, ListNode *headB)
 	{
 		int lenA = 0, lenB = 0;
 		ListNode* head = headA;
@@ -180,7 +194,7 @@ public:
 	ListNode *detectCycle(ListNode *head)
 	{
 
-		ListNode* fast = head, *slow = head, *meet=NULL;
+		ListNode* fast = head, *slow = head, *meet = NULL;
 		while (fast && fast->next && slow)
 		{
 			fast = fast->next->next;
@@ -248,8 +262,8 @@ public:
 		}
 		return nodeVec[0];
 	}
-	
-	ListNode* mergeKLists(vector<ListNode*>& lists)
+
+	ListNode* mergeKLists2(vector<ListNode*>& lists)
 	{
 		ListNode temp_head(0);
 		temp_head.next = NULL;
@@ -258,7 +272,7 @@ public:
 		{
 			vector<ListNode*>::iterator it = lists.begin();
 			vector<ListNode*>::iterator minIt = it;
-			while (it!=lists.end())
+			while (it != lists.end())
 			{
 				//该链表为空
 				if ((*it) == NULL)
@@ -279,7 +293,7 @@ public:
 				ListNode* next = (*minIt)->next;
 				lists.erase(minIt);
 				lists.push_back(next);
-			}	
+			}
 		}
 		if (lists.size() == 1)
 		{
@@ -288,7 +302,36 @@ public:
 
 		return temp_head.next;
 	}
-	
+
+	//使用优先队列
+	ListNode* mergeKLists(vector<ListNode*>& lists) 
+	{
+		priority_queue<ListNode*, vector<ListNode* >, cmp> nodeQue;
+		vector<ListNode*>::iterator it = lists.begin();
+		ListNode temp_head(0);
+		ListNode* tail = &temp_head;
+		tail->next = NULL;
+		while (it != lists.end())
+		{
+			ListNode* temp = (*it);
+			while (temp)
+			{
+				nodeQue.push(temp);
+				temp = temp->next;
+			}
+			it++;
+		}
+		while (!nodeQue.empty())
+		{
+			tail->next = nodeQue.top();
+			nodeQue.pop();
+			tail = tail->next;
+		}
+		tail->next = NULL;
+		return temp_head.next;
+		
+	}
+
 };
 void printList(ListNode* head)
 {
@@ -339,8 +382,8 @@ int main()
 
 	Solution solu;
 	vector<ListNode*> lists;
-	lists.push_back(NULL);
-	lists.push_back(NULL);
+	lists.push_back(head);
+	lists.push_back(head1);
 	lists.push_back(NULL);
 	ListNode* p = solu.mergeKLists(lists);
 	printList(p);
