@@ -7,11 +7,12 @@
 #include <queue>
 using namespace std;
 
+
 struct ListNode
 {
 	int val;
 	ListNode* next;
-	ListNode(int x) :val(x), next(NULL) {}
+	ListNode(int x) :val(x), next(NULL) {}	
 };
 
 // ·Âº¯Êý
@@ -313,19 +314,22 @@ public:
 		tail->next = NULL;
 		while (it != lists.end())
 		{
-			ListNode* temp = (*it);
-			while (temp)
-			{
-				nodeQue.push(temp);
-				temp = temp->next;
-			}
+			if (*it)
+			nodeQue.push((*it));
 			it++;
 		}
 		while (!nodeQue.empty())
 		{
-			tail->next = nodeQue.top();
+			ListNode* top = nodeQue.top();
 			nodeQue.pop();
-			tail = tail->next;
+			if (top)
+			{
+				tail->next = top;
+				tail = tail->next;
+				if (top->next)
+					nodeQue.push(top->next);
+			}
+			
 		}
 		tail->next = NULL;
 		return temp_head.next;
