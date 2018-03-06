@@ -1,4 +1,3 @@
-/*
 #include<iostream>
 #include<cstdio>
 #include<queue>
@@ -32,12 +31,12 @@ public:
 	double findKthSortedArrays(vector<int>& nums1, vector<int>& nums2, int k) {
 		int n = nums1.size();
 		int m = nums2.size();
-		if (n > m)   //±£Ö¤Êı×é1Ò»¶¨×î¶Ì
+		if (n > m)   //ä¿è¯æ•°ç»„1ä¸€å®šæœ€çŸ­
 			return findMedianSortedArrays(nums2, nums1);
-		int L1, L2, R1, R2, c1, c2, lo = 0, hi = 2 * n;  //ÎÒÃÇÄ¿Ç°ÊÇĞéÄâ¼ÓÁË'#'ËùÒÔÊı×é1ÊÇ2*n³¤¶È
-		while (lo <= hi)   //¶ş·Ö
+		int L1, L2, R1, R2, c1, c2, lo = 0, hi = 2 * n;  //æˆ‘ä»¬ç›®å‰æ˜¯è™šæ‹ŸåŠ äº†'#'æ‰€ä»¥æ•°ç»„1æ˜¯2*né•¿åº¦
+		while (lo <= hi)   //äºŒåˆ†
 		{
-			c1 = (lo + hi) / 2;  //c1ÊÇ¶ş·ÖµÄ½á¹û
+			c1 = (lo + hi) / 2;  //c1æ˜¯äºŒåˆ†çš„ç»“æœ
 			c2 = 2*k-1 - c1;
 			if (c2 < 0)
 			{
@@ -77,4 +76,3 @@ int main()
 	system("pause");
 	return 0;
 }
-*/
