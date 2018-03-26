@@ -1,2 +1,2 @@
-My codes for Virtual Judge and leetcode
+Talk is cheap. Show me the code. --Linus
 
