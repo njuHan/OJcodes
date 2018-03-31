@@ -67,13 +67,23 @@ public:
 		}
 		return ans;
 		*/
-		
+		// 需要考虑之后字符的字典序，可以使用max 或者 操作符 >
+		/*
 		vector<int> out;
 		auto i1 = nums1.begin(), end1 = nums1.end();
 		auto i2 = nums2.begin(), end2 = nums2.end();
 		while (i1 != end1 || i2 != end2)
 			out.push_back(lexicographical_compare(i1, end1, i2, end2) ? *i2++ : *i1++);
 		return out;
+		*/
+		vector<int> ans;
+		while (nums1.size() || nums2.size())
+		{
+			vector<int> &bigger = nums1 > nums2? nums1 : nums2;
+			ans.emplace_back(bigger[0]);
+			bigger.erase(bigger.begin());
+		}
+		return ans;
 		
 	}
 };
