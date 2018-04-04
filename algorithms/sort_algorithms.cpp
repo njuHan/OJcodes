@@ -236,6 +236,29 @@ int split(int a[], int first, int last)
 	return pos;
 }
 
+//×ó±ÕÓÒ¿ªÇø¼ä[begin, end)
+int split(int* a, int begin, int end)
+{
+	int val = a[begin];
+	int less = begin;
+	for (int i = begin; i < end; i++)
+	{
+		if (a[i] < val)
+			swap(a[++less], a[i]);
+	}
+	swap(a[less], a[begin]);
+	return less;
+}
+void quickSort(int* a, int x, int y) //[x,y)
+{
+	if (y - x > 1)
+	{
+		int m = split(a, x, y);
+		quickSort(a, x, m);
+		quickSort(a, m + 1, y);
+	}
+}
+
 //--------------------------------------------------------------------
 
 /*
