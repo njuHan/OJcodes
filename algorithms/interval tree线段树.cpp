@@ -44,6 +44,8 @@ void update(int x, int c, int l, int r, int rt) //l,r±íÊ¾µ±Ç°½ÚµãÇø¼ä£¬rt±íÊ¾µ±Ç
 		sum[rt] += c;
 		return;
 	}
+	//Èç¹ûÌâÄ¿ÖÐÊÇµãÐÞ¸ÄºÍÇø¼äÐÞ¸Ä»ìºÏµÄ»°£¬ÄÇÃ´µãÐÞ¸ÄÖÐÒ²ÐèÒªPushDown¡£
+	pushDown(rt, m - l + 1, r - m);
 	int m = l + ((r - l) >> 1);
 	if (x <= m) update(x, c, l, m, rt<<1);//×ó×ÓÊ÷
 	else update(x, c, m + 1, r, rt << 1 | 1); //ÓÒ×ÓÊ÷
