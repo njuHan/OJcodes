@@ -13,9 +13,9 @@ using namespace std;
 const int maxn = 101; 
 // 取下标1开始
 //树根结点 rt, 左子树：ls = rt<<1, 右子树：rs = rt<<1|1
-int a[maxn]; //源数据数组 1..n
+int a[maxn]; //源数据数组可以下标从0开始[0,n-1]
 //sum 求和， add懒惰标记
-int sum[maxn << 2], add[maxn << 2]; //树结点个数开4倍空间
+int sum[maxn << 2], add[maxn << 2]; //树结点个数开4倍空间，根结点从1开始
 
 //build tree
 void pushUp(int rt)
@@ -100,26 +100,25 @@ int query(int x, int y, int l, int r, int rt) //x,y表示操作区间，l,r表示当前节点
 	if (y >= m + 1) ans += query(x, y, m + 1, r, rt << 1 | 1);
 	return ans;
 }
-/*
+
 int main()
 {
-	int n = 1;
+	int n = 10;
 	int x = 1, y = 10;
 	int c = 2;
 	//建树   
-	build(1, n, 1);
+	build(0, n-1, 1);
 	//点修改  
-	//update(x, c, 1, n, 1);
-	update(1, -1, 1, n, 1);
-	
+	update(x, c, 0, n-1, 1);
+
 	//区间修改   
-	//update(x, y, c, 1, n, 1);
+	update(x, y, c, 0, n-1, 1);
 	//区间查询   
-	int ans = query(1, 3, 1, n, 1);
+	int ans = query(1, 3, 0, n-1, 1);
 	cout << ans;
 	system("pause");
 	return 0;
 }
-*/
+
 
 

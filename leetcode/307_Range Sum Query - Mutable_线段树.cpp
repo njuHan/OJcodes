@@ -18,19 +18,19 @@ public:
 		{
 			sum = vector<int>(n << 2, 0);
 			add = vector<int>(n << 2, 0);
-			build(1, n, 1);
+			build(0, n-1, 1);
 		}
 	}
 
 	void update(int i, int val) {
 		if (n < 1) return;
 		int c = val - a[i];
-		update(i+1, c, 1, n, 1);
+		update(i, c, 0, n-1, 1);
 	}
 
 	int sumRange(int i, int j) {
 		if (n < 1) return 0;
-		return query(i + 1, j + 1, 1, n, 1);
+		return query(i, j, 0, n-1, 1);
 	}
 private:
 	int n;
@@ -47,7 +47,7 @@ private:
 	{
 		if (l == r)
 		{
-			sum[rt] = a[l-1];
+			sum[rt] = a[l];
 			return;
 		}
 		int m = l + ((r - l) >> 1); //ÖÐ¼äµã
@@ -63,7 +63,7 @@ private:
 		if (l == r)
 		{
 			sum[rt] += c;
-			a[l - 1] += c;
+			a[l] += c;
 			return;
 		}
 		int m = l + ((r - l) >> 1);
