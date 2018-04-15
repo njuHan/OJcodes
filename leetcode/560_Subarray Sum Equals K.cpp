@@ -5,6 +5,7 @@
 #include<functional>
 #include<bitset>
 #include<map>
+#include<unordered_map>
 using namespace std;
 
 class Solution {
@@ -25,7 +26,7 @@ public:
 	int subarraySum(vector<int>& nums, int k) {
 		int len = nums.size();
 		int ans = 0;
-		map<int, int> sumCnt;
+		unordered_map<int, int> sumCnt;
 		sumCnt[0]++;
 		int sum = 0;
 		for (int i = 0; i < len; i++)
