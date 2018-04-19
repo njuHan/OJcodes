@@ -17,7 +17,7 @@ struct ListNode {
 
 class Solution {
 public:
-	ListNode* deleteDuplicates2(ListNode* head)
+	ListNode* deleteDuplicates(ListNode* head)
 	{
 		if (head == NULL || head->next == NULL) return head;
 		for (ListNode** pp = &head; *pp; )
