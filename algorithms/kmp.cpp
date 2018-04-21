@@ -25,7 +25,7 @@ void getNext(char * p, int * next)
 	next[0] = -1;
 	int i = 0, j = -1;
 
-	while (i < strlen(p))
+	while (i < strlen(p)-1)
 	{
 		if (j == -1 || p[i] == p[j])
 		{
