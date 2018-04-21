@@ -29,6 +29,19 @@ public:
 		return dp[n];
 		
 	}
+	int numSquares2(int n)
+	{
+		vector<int> dp(1,0); //dp[0] =1;
+		while (dp.size()<=n)
+		{
+			int m = dp.size();
+			int num = INT_MAX;
+			for (int i = 1; i*i <= m; i++)
+				num = min(num, dp[m - i*i]+1);
+			dp.push_back(num);
+		}
+		return dp[n];
+	}
 
 
 };

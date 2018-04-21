@@ -8,6 +8,17 @@ public:
 	int removeDuplicates(vector<int>& nums) {
 		int len = nums.size();
 		if (len <= 1) return len;
+		int idx = 0;
+		for (int i = 0; i < len; i++)
+		{
+			if (nums[idx] != nums[i])
+				nums[++idx] = nums[i];
+		}
+		return idx + 1;
+	}
+	int removeDuplicates2(vector<int>& nums) {
+		int len = nums.size();
+		if (len <= 1) return len;
 		int cnt = 0, max = INT_MIN;
 		vector<int>::iterator it = nums.begin();
 		while (it!=nums.end())

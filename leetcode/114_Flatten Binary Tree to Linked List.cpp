@@ -19,6 +19,17 @@ class Solution {
 public:
 	void flatten(TreeNode* root)
 	{
+		flatten(root, NULL);
+	}
+	TreeNode *flatten(TreeNode *root, TreeNode *tail) {
+		if (NULL == root) return tail;
+		root->right = flatten(root->left, flatten(root->right, tail));
+		root->left = NULL;
+		return root;
+	}
+
+	void flatten2(TreeNode* root)
+	{
 		TreeNode* p = root;
 		TreeNode* q;
 		while (p)
