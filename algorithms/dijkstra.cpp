@@ -22,6 +22,7 @@ void dijkstraBase(int src)
 	int x, m = INF;
 	for (int node = 0; node<maxn; node ++)
 	{
+		m = INF;
 		for (int i = 0; i < maxn; i++)
 		{
 			if (vis[i]==0 && d[i] <= m)

@@ -80,6 +80,41 @@ void instSortR(int a[], int n)
 	a[i + 1] = val;
 }
 
+	//merge the sorted two vec: [i,mid), [mid, j)
+	// and store the result in vec
+	//左闭右开写起来方便
+	void merge(vector<pair<int, int>>& vec, int i, int mid, int j)
+	{
+		// [vec[i], vec[mid]) 左闭右开
+		vector<pair<int, int>> v1(&vec[i], &vec[mid]);
+		vector<pair<int, int>> v2(&vec[mid], &vec[j]);
+		int len1 = mid - i , len2 = j - mid;
+		int k = i, p = 0, q = 0;
+		while (p < len1 || q < len2)
+		{
+			// 从v1中选取
+			if (q >= len2 || (p < len1 && v1[p].first <= v2[q].first))
+			{
+				cnt[v1[p].second] += q;
+				vec[k++] = v1[p++];
+			}
+			else  
+			{
+				vec[k++] = v2[q++];
+			}
+		}
+	}
+	void mergeSort(vector<pair<int, int>>& vec, int i, int j) //[i, j )
+	{
+		if (j-i>1)
+		{
+			int mid = i + (j - i) / 2;
+			mergeSort(vec, i, mid);
+			mergeSort(vec, mid, j);
+			merge(vec, i, mid, j);
+		}
+	}
+
 //--------------------------------------------------------------------
 /*
 Merge Sort, Iterative Merge Sort
@@ -255,7 +290,7 @@ void quickSort(int* a, int x, int y) //[x,y)
 	{
 		int m = split(a, x, y);
 		quickSort(a, x, m);
-		quickSort(a, m + 1, y);
+		quickSort(a, m + 1, y);//注意这里排除m，和归并排序不一样
 	}
 }
 
@@ -266,7 +301,7 @@ heap sort
 */
 // To heapify a subtree rooted with node i which is
 // an index in arr[]. n is size of heap
-void heapify(int arr[], int n, int i)
+void heapify(int arr[], int n, int i) //i为根结点
 {
 	int largest = i;  // Initialize largest as root
 	int l = 2 * i + 1;  // left = 2*i + 1
