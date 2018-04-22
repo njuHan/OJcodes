@@ -43,9 +43,10 @@ int muti(int a, int b)
 		shift[1 << i] = i;
 	}
 	int sum = 0;
-	while (b > 0)
+	while (b > 0) //遍历 b 的二进制1
 	{
-		int last = b&(~b + 1); //取出最后一个1，add
+		//int last = b&(~b + 1); //取出最后一个1，add
+		int last = b&(-b); //-b == (~b+1)
 		int temp = shift[last];
 		sum = sum + (a << temp); //改为 add()
 		b = b&(b - 1); //消去最后一个1， sub
@@ -57,7 +58,7 @@ int muti(int a, int b)
 //除法
 int mydiv(int a, int b)
 {
-	if (b == 0) return INT_MAX; //return INF;
+	if (b == 0) throw std::exception("divider is zero");
 	bool nega = (a < 0) ^ (b < 0);
 	a = a < 0 ? -a : a;
 	b = b < 0 ? -b : b;

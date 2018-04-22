@@ -24,7 +24,7 @@ void RMQ_init(const vector<int> A)
 
 	for (int j = 1; (1 << j) <= n; j++)   
 	{
-		for (int i=0; i+(1<<j)-1 < n; i++)
+		for (int i=0; i+(1<<j)-1 < n; i++) //i + (1<<j) <= n
 		{
 			d[i][j] = min(d[i][j - 1], d[i + (1 << (j - 1))][j - 1]);  
 		}
