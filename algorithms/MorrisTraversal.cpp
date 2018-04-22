@@ -39,10 +39,10 @@ void inorderMorrisTraversal(TreeNode *root)
 			if (pre->right == NULL) //建立返回指针
 			{
 				pre->right = cur;
-				cur = cur->left;
+				cur = cur->left; //继续建立左子树返回指针
 			}
 			else //if (pre->right == cur) //输出根结点， 消除返回指针
-			{
+			{  //已经遍历完左子树
 				pre->right = NULL;
 				cout << cur->val;  //输出根结点
 				cur = cur->right; //考虑右子树
@@ -147,3 +147,35 @@ void postorderMorrisTraversal(TreeNode *root) {
 		}
 	}
 }
+
+//用栈实现后序遍历
+void postorderTraversal(TreeNode* root)
+{
+	if (root==NULL) return;
+	stack<TreeNode*> sk;
+	sk.push(root);
+	TreeNode* pre=NULL, cur = NULL;
+	while(!sk.empty())
+	{
+		cur = sk.top();
+		//如果当前节点没有左右孩子，或者有左孩子或有孩子，但已经被访问输出，  
+            //则直接输出该节点，将其出栈，将其设为上一个访问的节点  
+		if ((cur->left==NULL && cur->right==NULL)||(pre!=NULL && (cur->left==pre || cur->right==pre)))
+		{
+			cout<<cur->val;
+			sk.pop();
+			pre = cur;
+		}
+		else
+		{
+			if (cur->left)
+				sk.push(cur->left);
+			if (cur->right)
+				sk.push(cur->right);
+		}
+			
+	}
+	
+}
+	
+	

@@ -16,7 +16,7 @@ int u[m];  //edge(u,v)
 int v[m];
 
 //间接排序， 排序后， 从权重小的边的下标 到 权重大的边的下标
-int cmp(const int i, const int j)
+int cmp(const int& i, const int& j)
 {
 	return w[i] < w[j];
 }
