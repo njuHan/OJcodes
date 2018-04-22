@@ -71,7 +71,7 @@ void getPermus()
 		permus[n][0] = 1;
 		for (int r = 1; r <= n; r++) //注意A(n,n)要单独讨论
 		{
-			if (r == n)
+			if (r == n) //A(n,n) = n*A(n-1,n-1);
 				permus[n][r] = r*permus[n - 1][r - 1];
 			else
 				permus[n][r] = permus[n - 1][r] + r*permus[n - 1][r - 1];
