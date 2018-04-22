@@ -20,19 +20,23 @@ void dijkstraBase(int src)
 	memset(vis, 0, sizeof(vis));
 	for (int i = 0; i < maxn; i++) d[i] = (i == src ? 0 : INF);
 	int x, m = INF;
-	for (int i = 0; i < maxn; i++)
+	for (int node = 0; node<maxn; node ++)
 	{
-		if (vis[i]==0 && d[i] <= m)
+		for (int i = 0; i < maxn; i++)
 		{
-			m = d[x = i];
+			if (vis[i]==0 && d[i] <= m)
+			{
+				m = d[x = i];
+			}
+		}
+		vis[x] = 1;
+		for (int i = 0; i < maxn; i++)
+		{
+			if (w[x][i] < INF)
+				d[i] = min(d[i], d[x] + w[x][i]);
 		}
 	}
-	vis[x] = 1;
-	for (int i = 0; i < maxn; i++)
-	{
-		if (w[x][i] < INF)
-			d[i] = min(d[i], d[x] + w[x][i]);
-	}
+	
 }
 
 //存储每个结点出发的边，利用优先队列，选择d[]最小的结点
