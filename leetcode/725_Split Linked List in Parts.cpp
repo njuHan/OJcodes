@@ -19,55 +19,19 @@ public:
 		int len = 0;
 		vector<ListNode*> ans;
 		if (k <= 0) return ans;
-		if (root == NULL) return vector<ListNode*>(k,NULL);
-		ListNode* p = root;
-		while (p)
+		ans = vector<ListNode*>(k,NULL);
+		for (ListNode* p = root; p; p = p->next) len++;
+		int a = len / k, b = len%k;
+		for (int i = 0; i < k && root; i++)
 		{
-			p = p->next;
-			len++;
-		}
-		if (len <= k)
-		{
-			p = root;
-			for (int i = 0; i < k; i++)
+			ans[i] = root;
+			for (int j = 1; j < a + (i < b); j++)
 			{
-				if (p)
-				{
-					ans.push_back(p);
-					ListNode* next = p->next;
-					p->next = NULL;
-					p = next;
-				}
-				else
-					ans.push_back(NULL);
+				root = root->next;
 			}
-		}
-		else
-		{
-			int partlen = len / k, more = len%k;
-			int i = 0;
-			p = root;
-			while (i<k)
-			{
-				int templen = i < more ? partlen + 1 : partlen;
-				for (int j = 0; j < templen ; j++)
-				{
-					if (j == 0)
-						ans.push_back(p);
-					if (j == templen -1)
-					{
-						ListNode* next = p->next;
-						p->next = NULL;
-						p = next;
-					}
-					else
-					{
-						p = p->next;
-					}
-				}
-				i++;
-			}
-			
+			ListNode* next = root->next;
+			root->next = NULL;
+			root = next;
 		}
 		return ans;
 	}
