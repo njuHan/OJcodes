@@ -123,6 +123,7 @@ void quickSort(ListNode* head, ListNode* tail, ListNode** root)
 		}
 
 		/* If entire list was ascending, done. */
+		// 此时相当于把链表反转，再处理head 和 tail
 		if (p == NULL) {
 			*root = head;
 			head->next = hi;
