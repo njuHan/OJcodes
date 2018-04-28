@@ -80,74 +80,44 @@ void instSortR(int a[], int n)
 	a[i + 1] = val;
 }
 
-	//merge the sorted two vec: [i,mid), [mid, j)
-	// and store the result in vec
-	//左闭右开写起来方便
-	void merge(vector<pair<int, int>>& vec, int i, int mid, int j)
-	{
-		// [vec[i], vec[mid]) 左闭右开
-		vector<pair<int, int>> v1(&vec[i], &vec[mid]);
-		vector<pair<int, int>> v2(&vec[mid], &vec[j]);
-		int len1 = mid - i , len2 = j - mid;
-		int k = i, p = 0, q = 0;
-		while (p < len1 || q < len2)
-		{
-			// 从v1中选取
-			if (q >= len2 || (p < len1 && v1[p].first <= v2[q].first))
-			{
-				cnt[v1[p].second] += q;
-				vec[k++] = v1[p++];
-			}
-			else  
-			{
-				vec[k++] = v2[q++];
-			}
-		}
-	}
-	void mergeSort(vector<pair<int, int>>& vec, int i, int j) //[i, j )
-	{
-		if (j-i>1)
-		{
-			int mid = i + (j - i) / 2;
-			mergeSort(vec, i, mid);
-			mergeSort(vec, mid, j);
-			merge(vec, i, mid, j);
-		}
-	}
-
-//--------------------------------------------------------------------
-/*
-Merge Sort, Iterative Merge Sort
-*/
-//merge the sorted two vec: [i,mid] and[mid+1,j]
+//merge the sorted two vec: [i,mid), [mid, j)
 // and store the result in vec
+//左闭右开写起来方便
 void merge(vector<int>& vec, int i, int mid, int j)
 {
 	// [vec[i], vec[mid]) 左闭右开
-	vector<int> v1(&vec[i], &vec[mid] + 1);
-	vector<int> v2(&vec[mid + 1], &vec[j] + 1);
-	int len1 = mid - i + 1, len2 = j - mid;
+	vector<int> v1(&vec[i], &vec[mid]);
+	vector<int> v2(&vec[mid], &vec[j]);
+	int len1 = mid - i, len2 = j - mid;
 	int k = i, p = 0, q = 0;
-	while (p<len1 && q<len2)
+	while (p < len1 || q < len2)
 	{
-		if (v1[p] <= v2[q])
+		// 从v1中选取
+		if (q >= len2 || (p < len1 && v1[p] <= v2[q]))
+		{
 			vec[k++] = v1[p++];
+		}
 		else
+		{
 			vec[k++] = v2[q++];
+		}
 	}
-	while (p < len1) vec[k++] = v1[p++];
-	while (q < len2) vec[k++] = v2[q++];
 }
-void mergeSort(vector<int>& vec, int i, int j)
+void mergeSort(vector<int>& vec, int i, int j) //[i, j)
 {
-	if (i < j)
+	if (j - i>1)
 	{
 		int mid = i + (j - i) / 2;
 		mergeSort(vec, i, mid);
-		mergeSort(vec, mid + 1, j);
+		mergeSort(vec, mid, j);
 		merge(vec, i, mid, j);
 	}
 }
+
+//--------------------------------------------------------------------
+/*
+ Iterative Merge Sort
+*/
 /* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
 void merge(int arr[], int l, int m, int r);
 
