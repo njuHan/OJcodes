@@ -34,12 +34,12 @@ ListNode* merge(ListNode* head1, ListNode* head2)
 	tail->next = NULL;
 	while (head1 || head2)
 	{
-		if (head1 && (!head2 || head2->val >= head1->val))
+		if (head2==NULL || (head1 && head1->val <= head2->val))
 		{
 			tail = tail->next = head1;
 			head1 = head1->next;
 		}
-		if (head2 && (!head1 || head1->val >= head2->val))
+		else
 		{
 			tail = tail->next = head2;
 			head2 = head2->next;
