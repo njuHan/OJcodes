@@ -149,33 +149,35 @@ void postorderMorrisTraversal(TreeNode *root) {
 }
 
 //用栈实现后序遍历
-void postorderTraversal(TreeNode* root)
-{
-	if (root==NULL) return;
+
+vector<int> postorderTraversal(TreeNode* root) {
+	vector<int> ans;
+	if (root == NULL) return ans;
 	stack<TreeNode*> sk;
-	sk.push(root);
-	TreeNode* pre=NULL, cur = NULL;
-	while(!sk.empty())
+	TreeNode* curNode = root, *lastNode = NULL;
+	while (curNode || !sk.empty())
 	{
-		cur = sk.top();
-		//如果当前节点没有左右孩子，或者有左孩子或有孩子，但已经被访问输出，  
-            //则直接输出该节点，将其出栈，将其设为上一个访问的节点  
-		if ((cur->left==NULL && cur->right==NULL)||(pre!=NULL && (cur->left==pre || cur->right==pre)))
+		if (curNode)
 		{
-			cout<<cur->val;
-			sk.pop();
-			pre = cur;
+			sk.push(curNode);
+			curNode = curNode->left;
 		}
 		else
 		{
-			if (cur->left)
-				sk.push(cur->left);
-			if (cur->right)
-				sk.push(cur->right);
+			TreeNode* node = sk.top();
+			if (node->right && node->right != lastNode)
+			{
+				curNode = node->right;
+			}
+			else
+			{
+				ans.push_back(node->val);
+				lastNode = node;
+				sk.pop();
+			}
 		}
-			
 	}
-	
+	return ans;
 }
 	
 	
