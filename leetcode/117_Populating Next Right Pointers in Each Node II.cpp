@@ -22,7 +22,7 @@ struct TreeLinkNode {
 
 class Solution {
 public:
-	void connect(TreeLinkNode *root) {
+	void connect2(TreeLinkNode *root) {
 		if (!root) return;
 		queue<TreeLinkNode*> que;
 		que.push(root);
@@ -41,4 +41,23 @@ public:
 			}
 		}
 	}
+
+	//O(1) space
+	void connect(TreeLinkNode *root)
+	{
+		TreeLinkNode* head = root, temp = TreeLinkNode(0);
+		while (head)
+		{
+			TreeLinkNode* parent = head, *child = &temp;
+			while (parent)
+			{
+				if (parent->left) child = child->next = parent->left;
+				if (parent->right) child = child->next = parent->right;
+				parent = parent->next;
+			}
+			child->next = NULL;
+			head = temp.next;
+		}
+	}
+	
 };
