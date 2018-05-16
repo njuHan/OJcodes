@@ -56,27 +56,31 @@ int muti(int a, int b)
 }
 
 //除法
+//注意int溢出 https://leetcode.com/problems/divide-two-integers/description/
 int mydiv(int a, int b)
 {
-	if (b == 0) throw std::exception("divider is zero");
+	long long a = dividend, b = divisor, res = 0, one = 1;
 	bool nega = (a < 0) ^ (b < 0);
 	a = a < 0 ? -a : a;
 	b = b < 0 ? -b : b;
 	if (a < b) return 0;
 	int msb = 0;
-	while ((b<<msb)<a)
+	while ((b << msb)<a)
 	{
 		msb++;
 	}
-	int res = 0;
 	for (int i = msb; i >= 0; i--)
 	{
 		if ((b << i) > a) continue;
-		res = res | (1 << i);
+		res = res | (one << i); //这里若用(1<<i) 当i==31时，变成负数
 		a = a - (b << i);
 	}
-	if (nega) return -res;
-	else return res;
+	//if (nega) return -res;
+	//else return res;
+	res = nega ? -res : res;
+	res = res < INT_MIN ? INT_MIN : res;
+	res = res > INT_MAX ? INT_MAX : res;
+	return res;
 }
 
 
