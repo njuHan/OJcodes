@@ -57,9 +57,10 @@ int muti(int a, int b)
 
 //³ý·¨
 //×¢ÒâintÒç³ö https://leetcode.com/problems/divide-two-integers/description/
-int mydiv(int a, int b)
+int mydiv(int dividend, int divisor)
 {
 	long long a = dividend, b = divisor, res = 0, one = 1;
+	if (b == 0) throw std::exception("divider is zero");
 	bool nega = (a < 0) ^ (b < 0);
 	a = a < 0 ? -a : a;
 	b = b < 0 ? -b : b;
