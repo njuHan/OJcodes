@@ -2,8 +2,9 @@ int KMP(char * t, char * p)
 {
 	int i = 0; 
 	int j = 0;
-
-	while (i < strlen(t) && j < strlen(p))
+	int tlen = strlen(t), plen = strlen(p);
+    // 不能写成：(i < t.length() && j < p.length()) ,注意 int 和 size_t比较时负数的情况
+	while (i < tlen && j < plen)  
 	{
 		if (j == -1 || t[i] == p[j]) 
 		{
