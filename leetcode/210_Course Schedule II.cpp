@@ -24,6 +24,32 @@ public:
 		}
 		return ans;
 	}
+	vector<int> findOrderBFS(int numCourses, vector<pair<int, int>>& prerequisites)
+	{
+		vector<int> ans;
+		unordered_map<int, vector<int>> adj;
+		vector<int> indegree(numCourses, 0);
+		for (auto e : prerequisites)
+		{
+			adj[e.second].push_back(e.first);
+			indegree[e.first]++;
+		}
+		queue<int> que;
+		for (int u = 0; u < numCourses; u++)
+			if (indegree[u] == 0) que.push(u);
+		while (!que.empty())
+		{
+			int u = que.front(); que.pop();
+			ans.push_back(u);
+			for (int v : adj[u])
+				if (--indegree[v] == 0) que.push(v);
+			
+		}
+		if (ans.size() == numCourses)
+			return ans;
+		else
+			return{};
+	}
 private:
 	unordered_map<int, vector<int>> adj;
 	vector<int> ans;
