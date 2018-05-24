@@ -8,6 +8,8 @@
 #include<unordered_set>
 using namespace std;
 
+// https://leetcode.com/problems/factorial-trailing-zeroes/discuss/52470/4-lines-4ms-C++-Solution-with-Explanations
+
 class Solution {
 public:
 	int trailingZeroes(int n) {
