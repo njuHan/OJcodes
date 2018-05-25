@@ -8,7 +8,7 @@
 #include<algorithm>
 using namespace std;
 
-
+// https://leetcode.com/problems/reverse-bits/description/
 unsigned char rev(unsigned char ch)
 {
 	unsigned char ans = 0;
