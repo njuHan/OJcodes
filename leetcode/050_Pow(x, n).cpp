@@ -38,10 +38,10 @@ public:
 		long long m = n;
 		if (m < 0) { m = -m; x = 1 / x; }
 		double ans = 1;
-		while (m)
+		while (m) // m 看成2进制，若干二次幂数组成
 		{
-			if (m & 1) ans *= x;
-			x *= x;
+			if (m & 1) ans *= x; // x的2次幂次方相乘
+			x *= x;  
 			m = m >> 1;
 		}
 		return ans;
