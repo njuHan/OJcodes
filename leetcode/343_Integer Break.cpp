@@ -16,7 +16,7 @@ using namespace std;
 class Solution {
 public:
 	int integerBreak(int n) {
-		less10 = { 0,0, 1,3,4,6,9,12,18,27 };
+		less10 = { 0,0, 1,2,4,6,9,12,18,27 };
 		return f(n);
 	}
 private:
