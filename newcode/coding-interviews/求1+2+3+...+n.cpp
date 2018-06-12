@@ -35,6 +35,25 @@ private:
 int Temp::n = 0;
 int Temp::sum = 0;
 
+//虚函数
+class A
+{
+public:
+	virtual int sum(int n) { return 0; };
+};
+A* arr[2];
+class B : public A
+{
+public:
+	virtual int sum(int n) { return n + arr[!!n]->sum(n - 1); }
+};
+
+//函数指针
+typedef int (*PF)(int);
+PF pf[2];
+int sum0(int n) { return 0; };
+int sum1(int n) { return pf[!!n](n - 1) + n; }
+
 class Solution {
 public:
 	int Sum_Solution1(int n) {
@@ -48,4 +67,17 @@ public:
 		n && (ans += Sum_Solution2(n - 1));
 		return ans;
 	}
+	int Sum_Solution3(int n) {
+		A a;
+		B b;
+		arr[0] = &a;
+		arr[1] = &b;
+		return b.sum(n);
+	}
+	int Sum_Solution4(int n) {
+		pf[0] = sum0;
+		pf[1] = sum1;
+		return sum1(n);
+	}
+
 };
