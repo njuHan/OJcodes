@@ -12,15 +12,40 @@
 using namespace std;
 
 
-class Solution {
+class Temp
+{
 public:
-	int Sum_Solution(int n) {
-		return f(n);
+	Temp()
+	{
+		sum += ++n;
+	}
+	static void reset()
+	{
+		sum = 0;
+		n = 0;
+	}
+	static int getSum()
+	{
+		return sum;
 	}
 private:
-	int f(int n)
-	{
-		if (n == 1) return 1;
-		return f(n - 1) + n;
+	static int sum;
+	static int n;
+};
+int Temp::n = 0;
+int Temp::sum = 0;
+
+class Solution {
+public:
+	int Sum_Solution1(int n) {
+		Temp::reset();
+		Temp* p = new Temp[n];
+		delete []p;
+		return Temp::getSum();
+	}
+	int Sum_Solution2(int n) {
+		int ans = n;
+		n && (ans += Sum_Solution2(n - 1));
+		return ans;
 	}
 };
