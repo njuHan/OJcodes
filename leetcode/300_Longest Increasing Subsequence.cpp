@@ -13,6 +13,7 @@ using namespace std;
 
 class Solution {
 public:
+	//O(n*n)
 	int lengthOfLIS2(vector<int>& nums) {
 		int len = nums.size();
 		if (len < 1) return 0;
@@ -30,8 +31,8 @@ public:
 		}
 		return ans;
 	}
-	//使用数组arr[i], 表示长度为i+1的上升子序列的最小的最后一个值(arr[i])
-	//数组arr[i]有序可以使用二分查找
+	
+	// https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
 	//O(nlog(n))
 	int lengthOfLIS(vector<int>& nums)
 	{
@@ -45,7 +46,7 @@ public:
 				arr.emplace_back(nums[i]);
 			else
 			{
-				vector<int>::iterator it = lower_bound(arr.begin(), arr.end(), nums[i]); // <=nums[i]的值，有限取==nums[i]的值
+				vector<int>::iterator it = lower_bound(arr.begin(), arr.end(), nums[i]); // *it >= nums[i]
 				*it = nums[i];
 			}
 		}
