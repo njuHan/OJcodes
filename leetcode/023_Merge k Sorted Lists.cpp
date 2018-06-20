@@ -44,4 +44,21 @@ public:
 		return temp_head.next;
         
     }
+	
+	ListNode* mergeKLists(vector<ListNode*>& lists) {
+        priority_queue < ListNode*, vector<ListNode*>, cmp> que;
+		ListNode temp(0);
+		ListNode* tail = &temp;
+		for (auto e : lists)
+			if (e) que.push(e);
+		while (!que.empty())
+		{
+			ListNode* node = que.top(); que.pop();
+			tail->next = node;
+			tail = tail->next;
+			if (node->next) que.push(node->next);
+		}
+        tail->next = NULL;
+		return temp.next;
+    }
 };
