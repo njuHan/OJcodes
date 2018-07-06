@@ -45,7 +45,7 @@ struct Edge
 struct BellmanFord
 {
 	vector<Edge> edges;
-	vector<int> G[maxn];
+	vector<int> G[maxn]; //G[u]存放 从u出发的边
 	int n, m;
 	int d[maxn];
 	bool inq[maxn]; //是否在队列中
