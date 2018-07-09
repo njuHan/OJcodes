@@ -33,6 +33,13 @@ public:
 			}
 		}
 	}
+	void rotate2(vector<vector<int>>& matrix) {
+        reverse(matrix.begin(), matrix.end());
+		int len = matrix.size();
+		for (int i = 0; i < len; i++)
+			for (int j = i + 1; j < len; j++)
+				swap(matrix[i][j], matrix[j][i]);
+    }
 	
 };
 int main()
