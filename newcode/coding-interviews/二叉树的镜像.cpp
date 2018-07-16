@@ -15,4 +15,18 @@ public:
 		Mirror(pRoot->left);
 		Mirror(pRoot->right);
 	}
+	//非递归
+	void Mirror2(TreeNode *pRoot) {
+		if (pRoot == NULL) return;
+		stack<TreeNode*> sk;
+		sk.push(pRoot);
+		while (!sk.empty())
+		{
+			TreeNode* node = sk.top(); sk.pop();
+			if (node->left || node->right)
+				swap(node->left, node->right);
+			if (node->left) sk.push(node->left);
+			if (node->right) sk.push(node->right);
+		}
+	}
 };
