@@ -42,7 +42,7 @@ public:
 		arr.emplace_back(nums[0]);
 		for (int i = 1; i < len; i++)
 		{
-			if (nums[i] > *(arr.end()-1)) 
+			if (nums[i] > arr.back()) 
 				arr.emplace_back(nums[i]);
 			else
 			{
