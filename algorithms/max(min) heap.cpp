@@ -28,7 +28,6 @@ void heapify(int arr[], int n, int i) //i为根结点, siftdown
 //迭代
 void siftdown(int arr[], int n, int i)
 {
-	int largest = i;  // Initialize largest as root
 	int j = 2 * i + 1;  // left = 2*i + 1
 	int temp = arr[i]; //调整的元素一直都是 temp
 	while (j<n)
@@ -80,6 +79,12 @@ void insert(int arr[], int size, int x)
 }
 
 //最大堆删除，删除堆顶元素
+void remove(int arr[], int size)
+{
+	if (size<=0) return;
+	arr[0] = arr[--size];
+	siftdown(arr, size, 0);
+}
 
 
 // main function to do heap sort
