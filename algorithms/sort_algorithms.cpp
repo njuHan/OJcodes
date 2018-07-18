@@ -271,7 +271,7 @@ heap sort
 */
 // To heapify a subtree rooted with node i which is
 // an index in arr[]. n is size of heap
-void heapify(int arr[], int n, int i) //i为根结点
+void heapify(int arr[], int n, int i) //i为根结点, siftdown
 {
 	int largest = i;  // Initialize largest as root
 	int l = 2 * i + 1;  // left = 2*i + 1
@@ -294,12 +294,29 @@ void heapify(int arr[], int n, int i) //i为根结点
 		heapify(arr, n, largest);
 	}
 }
+//max heap
+//迭代
+void siftdown(int arr[], int n, int i)
+{
+	int largest = i;  // Initialize largest as root
+	int j = 2 * i + 1;  // left = 2*i + 1
+	int temp = arr[i]; //调整的元素一直都是 temp
+	while (j<n)
+	{
+		if (j+1<n && arr[j+1] > arr[j]) j++; //指向较大的子结点
+		if (temp <arr[j] ) {arr[i] =  arr[j]; i = j; j = 2*i + 1;}
+		else break;
+	}
+	arr[i] = temp; //调整结束， 回送temp
+}
 
 // main function to do heap sort
 void heapSort(int arr[], int n)
 {
-	// Build heap (rearrange array)
-	for (int i = n / 2 - 1; i >= 0; i--)
+	//case1: right = 2*i + 2(偶数) = n - 1 , -> i = (n-2)/2, n 为奇数下取整， 
+	//case2: left = 2*i + 1(奇数) = n-1, i = (n-2)/2, n为偶数, 所以case1,2均满足 i = (n-2)/2
+	// Build max heap (rearrange array)
+	for (int i = n / 2 - 1; i >= 0; i--) 
 		heapify(arr, n, i);
 
 	// One by one extract an element from heap
