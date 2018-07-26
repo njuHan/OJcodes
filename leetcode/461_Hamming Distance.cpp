@@ -24,4 +24,14 @@ public:
 		}
 		return ans;
 	}
+	int hammingDistance3(int x, int y) {
+       int ans = 0;
+		int temp = x^y;
+		while (temp)
+		{
+			ans++;
+			temp = temp & (temp-1);
+		}
+		return ans;
+    }
 };
