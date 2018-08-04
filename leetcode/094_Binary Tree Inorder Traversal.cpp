@@ -17,6 +17,22 @@ struct TreeNode {
 
 class Solution {
 public:
+	vector<int> inorderTraversal2(TreeNode* root) {
+        vector<int> ans;
+        stack<TreeNode*> sk;
+        while(root || !sk.empty())
+        {
+            while(root) 
+            {
+                sk.push(root);
+                root = root->left;
+            }
+            TreeNode* node = sk.top(); sk.pop();
+            ans.emplace_back(node->val);
+            root = node->right;
+        }
+        return ans;
+    }
 	vector<int> inorderTraversal(TreeNode* root) {
 		if (root != NULL)
 		{

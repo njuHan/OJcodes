@@ -180,6 +180,8 @@ vector<int> postorderTraversal(TreeNode* root) {
 	return ans;
 }
 
+//内循环 while 一直向左走
+//前序， 中序， 后序 框架类似
 vector<int> postorderTraversal2(TreeNode* root) {
 	vector<int> ans;
 	if (root == NULL) return ans;
@@ -209,5 +211,38 @@ vector<int> postorderTraversal2(TreeNode* root) {
 	}
 	return ans;
 }
+vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        stack<TreeNode*> sk;
+        while(root || !sk.empty())
+        {
+            while(root) 
+            {
+                sk.push(root);
+                ans.emplace_back(root->val);
+                root = root->left;
+            }
+            TreeNode* node = sk.top(); sk.pop();
+            root = node->right;
+        }
+        return ans;
+    }
+	
+vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        stack<TreeNode*> sk;
+        while(root || !sk.empty())
+        {
+            while(root) 
+            {
+                sk.push(root);
+                root = root->left;
+            }
+            TreeNode* node = sk.top(); sk.pop();
+            ans.emplace_back(node->val);
+            root = node->right;
+        }
+        return ans;
+    }
 	
 	
