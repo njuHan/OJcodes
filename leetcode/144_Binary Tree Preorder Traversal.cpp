@@ -45,3 +45,22 @@ public:
 		return ans;
 	}
 };
+class Solution2 {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        stack<TreeNode*> sk;
+        while(root || !sk.empty())
+        {
+            while(root) 
+            {
+                sk.push(root);
+                ans.emplace_back(root->val);
+                root = root->left;
+            }
+            TreeNode* node = sk.top(); sk.pop();
+            root = node->right;
+        }
+        return ans;
+    }
+};
