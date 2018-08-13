@@ -12,7 +12,7 @@ struct cmp
 {
 	bool operator () (const pair<int, int>& p1, const pair<int, int>& p2)
 	{
-		return p1.second>p2.second;
+		return p1.second>p2.second; //频率低的优先级高
 	}
 };
 
@@ -21,7 +21,7 @@ public:
 	vector<int> topKFrequent(vector<int>& nums, int k) {
 		unordered_map<int, int> numCnt;
 		for (int e : nums) numCnt[e]++;
-
+		// 优先队列，队首优先级最高，把频率低的放在队首
 		priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> que;
 
 		for (auto e : numCnt)
@@ -46,6 +46,23 @@ public:
 		return ans;
 	}
 
+};
+
+class Solution2 {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        vector<int> ans;
+        unordered_map<int, int> cnt;
+        vector<set<int>> buckets(nums.size()+1);
+        for (int& i : nums) cnt[i]++;
+        for (auto& e : cnt) buckets[e.second].insert(e.first);
+        for (int i = nums.size(); i>=0; i--)
+        {
+            for (int num : buckets[i]) ans.push_back(num);
+            if (ans.size()>=k) break;
+        }
+        return ans;
+    }
 };
 
 int main()
