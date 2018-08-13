@@ -25,3 +25,19 @@ public:
 		return r;
 	}
 };
+
+class Solution2 {
+public:
+    int mySqrt(int x) {
+        if (x<=1) return x;
+        int ans = 0;
+        int lo = 1, hi = x;
+        while(lo<hi)
+        {
+            int mid = lo + (hi-lo)/2;
+            if (mid <= x/mid ) ans = mid, lo = mid+1; // x/mid 防溢出
+            else hi = mid;
+        }
+        return ans;
+    }
+};
