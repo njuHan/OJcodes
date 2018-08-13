@@ -27,3 +27,20 @@ public:
 		return ans;
 	}
 };
+
+class Solution2 {
+public:
+    string findLongestWord(string s, vector<string>& d) {
+        string ans = "";
+        for (string& word : d)
+        {
+            int i=0, j=0;
+            for ( ; i<s.length() && j<word.length(); i++ )
+            {
+                j += (s[i]==word[j]); 
+            }                                         //字典序小的优先   
+            if (j==word.length() && (ans.length()<j || (ans.length()==j && ans > word) )) ans = word;
+        } 
+        return ans;       
+    }
+};
