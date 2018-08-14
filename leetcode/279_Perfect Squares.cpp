@@ -10,6 +10,23 @@
 #include<set>
 using namespace std;
 
+class Solution2 {
+public:
+    int numSquares(int n) {
+        // 局部静态变量，只初始化一次，局部作用域，全局生存期
+        static vector<int> dp(1,0);
+		if (n < dp.size()) return dp[n];
+		int m = dp.size();
+		dp.resize(n+1, INT_MAX); //只把新添加的元素初始化为 int_max
+		
+        for (int i=m; i<=n; i++)
+        {
+            for (int j=1, j2; (j2 = j*j)<=i; j++)
+                dp[i] = min(dp[i], dp[i-j2]+1);
+        }
+        return dp[n];
+    }
+};
 
 class Solution {
 public:
