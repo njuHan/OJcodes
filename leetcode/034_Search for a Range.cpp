@@ -7,6 +7,37 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int x = lower(nums, target), y = upper(nums, target);
+        if (x==y) return {-1,-1};
+        return {x, y-1};
+    }
+private:
+    int lower(vector<int>& nums, int target)
+    {
+        int x = 0, y = nums.size();
+        while(x<y)
+        {
+            int mid = x + (y-x)/2;
+            if (nums[mid]>=target) y = mid;
+            else x = mid+1;
+        }
+        return x;
+    }
+    int upper(vector<int>& nums, int target)
+    {
+        int x = 0, y = nums.size();
+        while(x<y)
+        {
+            int mid = x + (y-x)/2;
+            if (nums[mid]<=target) x = mid + 1;
+            else y = mid;
+        }
+        return x;
+    }
+};
 
 class Solution {
 public:
