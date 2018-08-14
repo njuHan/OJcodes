@@ -44,10 +44,37 @@ private:
 	vector<vector<char>> g;
 };
 
-int main()
-{
-
-
-	system("pause");
-	return 0;
-}
+class Solution2 {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+		int color = 0;
+		if (grid.size() == 0 || grid[0].size() == 0) return 0;
+		m = grid.size();
+		n = grid[0].size();
+		
+		g = grid;
+		for (int i = 0; i < m; i++)
+			for (int j = 0; j < n; j++)
+			{
+				if (search(i, j))
+				{
+					color++;
+				}
+			}
+		return color;
+	}
+	bool search(int i, int j)
+	{
+		if (i < 0 || j < 0 || i >= m || j >= n || g[i][j]=='0') return false;
+		g[i][j]='0'; //访问后置为 0， 省掉vis数组
+		search(i - 1, j);
+		search(i + 1, j);
+		search(i, j - 1);
+		search(i, j + 1);
+		return true;
+	}
+private:
+	int m;
+	int n;
+	vector<vector<char>> g;
+};

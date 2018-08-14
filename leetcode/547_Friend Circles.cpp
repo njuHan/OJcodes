@@ -14,10 +14,13 @@ class Solution {
 public:
 	int findCircleNum(vector<vector<int>>& M) {
 		int cc, len;
+		
+		//并查集初始化
 		cc = len = M.size();
 		pa.resize(len, 0);
 		for (int i = 0; i < len; i++)
 			pa[i] = i;
+		
 		for (int i = 0; i < len; i++)
 			for (int j = i + 1; j < len; j++)
 			{
