@@ -8,6 +8,35 @@
 #include<sstream>
 using namespace std;
 
+class Solution2 {
+public:
+	vector<string> restoreIpAddresses(string s) {
+		vector<string> ans;
+		int len = s.length();
+		if (len < 4 || len>12) return ans;
+		string seg[4];
+		for (int a = 1; a <= 3 && a + 3 <= len; a++)
+		{
+			seg[0] = s.substr(0, a);
+			if (stoi(seg[0])>255 || a > 1 && seg[0][0] == '0') break;
+			for (int b = 1; b <= 3 && a + b + 2 <= len; b++)
+			{
+				seg[1] = s.substr(a, b);
+				if (stoi(seg[1]) > 255 || b > 1 && seg[1][0] == '0') break;
+				for (int c = 1; c <= 3 && a + b + c + 1 <= len; c++)
+				{
+					seg[2] = s.substr(a + b, c);
+					if (stoi(seg[2]) > 255 || c > 1 && seg[2][0] == '0') break;
+					seg[3] = s.substr(a + b + c);
+					if (stoi(seg[3]) > 255 || seg[3].length() > 1 && seg[3][0] == '0') continue;
+					ans.push_back(seg[0] + "." + seg[1] + "." + seg[2] + "." + seg[3]);
+				}
+			}
+		}
+		return ans;
+	}
+};
+
 class Solution {
 public:
 	vector<string> restoreIpAddresses(string s) {
