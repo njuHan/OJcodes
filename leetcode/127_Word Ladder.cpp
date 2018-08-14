@@ -8,9 +8,10 @@
 using namespace std;
 class Solution {
 public:
-	int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
 		wordDict = unordered_set<string>(wordList.begin(), wordList.end());
 		toVisit.push(beginWord);
+        wordDict.erase(beginWord); //入队列时删除，防止重复访问， 环
 		cnt = 1;
 		while (!toVisit.empty())
 		{
@@ -31,7 +32,6 @@ private:
 	unordered_set<string> wordDict;
 	void addWord(string word)
 	{
-		wordDict.erase(word);
 		for (int i = 0; i < word.size(); i++)
 		{
 			string temp(word);
@@ -41,10 +41,9 @@ private:
 				if (wordDict.count(temp))
 				{
 					toVisit.push(temp);
-					wordDict.erase(temp);
+					wordDict.erase(temp); //入队列时删除，防止重复访问， 环
 				}
 			}
 		}
 	}
 };
-
