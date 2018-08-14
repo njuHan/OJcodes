@@ -8,6 +8,36 @@
 #include<sstream>
 using namespace std;
 
+
+class Solution3 {
+public:
+	vector<string> restoreIpAddresses(string s) {
+		int len = s.length();
+		if (len < 4 || len>12) return ans;
+		search(0, 0, "", s);
+		return ans;
+	}
+private:
+	vector<string> ans;
+	void search(int idx, int seg, string ip, string& s)
+	{
+		if (seg == 3)
+		{
+			string temp = s.substr(idx);
+			if (stoi(temp) > 255 || temp.length() > 1 && temp[0] == '0') return;
+			ans.emplace_back(ip + temp);
+			return;
+		}
+		for (int len = 1; len <= 3 && idx + len + 3 - seg <= s.length(); len++)
+		{
+			string temp = s.substr(idx, len);
+			if (stoi(temp) > 255 || temp.length() > 1 && temp[0] == '0') return;
+            //cout<<temp<<endl;
+			search(idx + len, seg + 1, ip + temp + ".", s);
+		}
+	}
+};
+
 class Solution2 {
 public:
 	vector<string> restoreIpAddresses(string s) {
