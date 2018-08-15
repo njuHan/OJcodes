@@ -4,6 +4,29 @@
 #include<algorithm>
 using namespace std;
 
+
+class Solution2 {
+public:
+	vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+		vector<int> subset = {};
+        sort(nums.begin(), nums.end());
+		search(0, subset, nums);
+		return ans;
+	}
+private:
+	vector<vector<int>> ans;
+	void search(int cur, vector<int>& subset, vector<int>& nums)
+	{
+		ans.emplace_back(subset);
+		for (int i = cur; i < nums.size(); i++)
+		{
+			if (i > cur && nums[i - 1] == nums[i]) continue;
+			subset.emplace_back(nums[i]);
+			search(i + 1, subset, nums);
+			subset.pop_back();
+		}
+	}
+};
 	
 class Solution {
 public:
