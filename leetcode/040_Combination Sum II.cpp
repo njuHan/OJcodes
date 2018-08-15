@@ -4,6 +4,29 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+	vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+		sort(candidates.begin(), candidates.end());
+		vector<int> arr = {};
+		search(0, arr, target, candidates);
+		return ans;
+	}
+private:
+	vector<vector<int>> ans;
+	void search(int cur, vector<int>& arr, int target, vector<int>& candidates)
+	{
+		if (target == 0) { ans.emplace_back(arr); return; }
+		for (int i = cur; i < candidates.size() && candidates[i] <= target; i++)
+		{
+            //防止在同一个cur上取重复元素
+            if (i!=cur && candidates[i-1] == candidates[i]) continue;
+			arr.emplace_back(candidates[i]);
+			search(i+1, arr, target - candidates[i], candidates);
+			arr.pop_back();
+		}
+	}
+};
 
 class Solution {
 public:
