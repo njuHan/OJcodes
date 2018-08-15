@@ -7,6 +7,29 @@
 #include<algorithm>
 using namespace std;
 
+
+class Solution2 {
+public:
+	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+		sort(candidates.begin(), candidates.end());
+		vector<int> arr = {};
+		search(0, arr, target, candidates);
+		return ans;
+	}
+private:
+	vector<vector<int>> ans;
+	void search(int cur, vector<int>& arr, int target, vector<int>& candidates)
+	{
+		if (target == 0) { ans.emplace_back(arr); return; }
+		for (int i = cur; i < candidates.size() && candidates[i] <= target; i++)
+		{
+			arr.emplace_back(candidates[i]);
+			search(i, arr, target - candidates[i], candidates);
+			arr.pop_back();
+		}
+	}
+};
+
 class Solution {
 public:
 	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {

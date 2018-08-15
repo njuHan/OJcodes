@@ -9,6 +9,33 @@
 #include<set>
 #include<list>
 using namespace std;
+
+class Solution2 {
+public:
+	vector<vector<int>> combine(int n, int k) {
+		vector<int> comb = {};
+		search(1, n, k, comb);
+		return ans;
+	}
+private:
+	vector<vector<int>> ans;
+	void search(int cur, int n, int k, vector<int>& comb)
+	{	
+		if (k==0)
+		{
+			ans.emplace_back(comb);
+			return;
+		}
+		for (int i = cur; i <= n+1-k; i++)
+		{
+			comb.emplace_back(i);
+			search(i + 1, n, k-1, comb);
+			comb.pop_back();
+		}
+	}
+};
+
+
 class Solution {
 public:
 	vector<vector<int>> combine(int n, int k) {
