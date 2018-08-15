@@ -5,6 +5,36 @@
 #include<string>
 using namespace std;
 
+class Solution2 {
+public:
+	vector<vector<string>> partition(string s) {
+		vector<string> arr;
+		search(0, arr, s);
+		return ans;
+	}
+private:
+	vector<vector<string>> ans;
+	void search(int cur, vector<string>& arr, string& s)
+	{
+		if (cur == s.length()) { ans.emplace_back(arr); return; }
+		for (int i = cur; i < s.size(); i++)
+		{
+			if (isPalin(s, cur, i))
+			{
+				arr.emplace_back(string(&s[cur], &s[i + 1]));
+				search(i + 1, arr, s);
+				arr.pop_back();
+			}
+		}
+	}
+	bool isPalin(string& s, int x, int y)
+	{
+		while (x<y)
+			if (s[x++] != s[y--]) return false;
+		return true;
+	}
+};
+
 
 class Solution {
 public:
