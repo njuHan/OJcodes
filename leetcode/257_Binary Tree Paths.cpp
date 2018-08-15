@@ -13,6 +13,24 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+
+class Solution2 {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
+        dfs(root, "");
+        return ans;
+    }
+private:
+    vector<string> ans;
+    void dfs(TreeNode* node, string path)
+    {
+        if (!node) return;
+        if (!node->left && !node->right) ans.push_back(path+to_string(node->val));
+        if (node->left) dfs(node->left, path + to_string(node->val) + "->");
+        if (node->right) dfs(node->right, path + to_string(node->val) + "->");
+    }
+};
+
 class Solution {
 public:
 	vector<string> binaryTreePaths(TreeNode* root) {

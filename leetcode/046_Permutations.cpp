@@ -7,6 +7,37 @@
 #include<algorithm>
 using namespace std;
 
+
+class Solution2 {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        st = unordered_set<int>(nums.begin(), nums.end());
+        vector<int> cur = {};
+        search(cur, nums);
+        return ans;
+    }
+private:
+    unordered_set<int> st;
+    vector<vector<int>> ans;
+    void search(vector<int>& cur, vector<int>& nums)
+    {
+        if (cur.size() == nums.size()) {ans.emplace_back(cur); return;}
+        for (int& num : nums)
+        {
+            if (st.count(num))
+            {
+                cur.emplace_back(num);
+                st.erase(num);
+                search(cur, nums);
+                cur.pop_back();
+                st.insert(num);
+            }
+        }
+        
+    }
+};
+
+
 class Solution {
 public:
 	vector<vector<int>> permute(vector<int>& nums) {
