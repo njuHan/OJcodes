@@ -6,6 +6,50 @@
 using namespace std;
 
 
+class Solution2 {
+public:
+	vector<vector<string>> solveNQueens(int n) {
+		cols = vector<int>(n, 0);
+		vis = vector<vector<bool>>(3, vector<bool>(2 * n, 0));
+		search(0, cols);
+		return ans;
+	}
+private:
+	vector<vector<string>> ans;
+	vector<int> cols; //保存 列 坐标
+	vector<vector<bool>> vis; // 记录 列、正反对角线 
+	void search(int row, vector<int>& cols)
+	{
+		int n = cols.size();
+		if (row == n)
+		{
+			pushAns(cols);
+			return;
+		}
+		for (int j = 0; j < n; j++)
+		{
+			if (!vis[0][j] && !vis[1][row + j] && !vis[2][row - j + n])
+			{
+				cols[row] = j;
+				vis[0][j] = vis[1][row + j] = vis[2][row - j + n] = 1;
+				search(row + 1, cols);
+				vis[0][j] = vis[1][row + j] = vis[2][row - j + n] = 0;
+			}
+		}
+	}
+	void pushAns(vector<int>& cols)
+	{
+		vector<string> temp;
+		for (int i = 0; i < cols.size(); i++)
+		{
+			string str(cols.size(), '.');
+			str[cols[i]] = 'Q';
+            temp.emplace_back(str);
+		}
+		ans.emplace_back(temp);
+	}
+};
+
 class Solution {
 public:
 	vector<vector<string>> solveNQueens(int n) {
