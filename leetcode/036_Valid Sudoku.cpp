@@ -8,6 +8,24 @@
 #include<unordered_set>
 using namespace std;
 
+
+class Solution2 {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        bool row[9][10] = {0}, col[9][10] = {0}, cell[9][10] = {0};
+        for (int i=0; i<9; i++)
+            for (int j=0; j<9; j++)
+                if (board[i][j]!='.')
+                {
+                    int num = board[i][j]-'0', k = i/3*3 + j/3;
+                    if (row[i][num] || col[j][num] || cell[k][num])
+                        return false;
+                    row[i][num] = col[j][num] = cell[k][num] = 1;
+                }
+        return true;
+    }
+};
+
 /*
 static int x = []() {
 	std::ios::sync_with_stdio(false);

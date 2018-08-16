@@ -8,6 +8,49 @@
 #include<unordered_set>
 using namespace std;
 
+
+class Solution2 {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        memset(row, 0, sizeof(row));
+        memset(col, 0, sizeof(col));
+        memset(cell, 0, sizeof(cell));
+        for (int i=0; i<9; i++)
+            for (int j=0; j<9; j++)
+            {
+                if (board[i][j]!='.')
+                {
+                    int num = board[i][j] - '0', k = i/3*3 + j/3;
+                    row[i][num] = col[j][num] = cell[k][num] = 1;
+                }
+            }
+        solve(0,0,board);
+    }
+private:
+    bool row[9][10] , col[9][10], cell[9][10];
+    bool solve(int x, int y, vector<vector<char>>& board)
+    {
+        if (x==9) return true;
+        if (y==9) return solve(x+1,0,board);
+        if (board[x][y]!='.') return solve(x,y+1, board);
+        int k = x/3*3 + y/3;
+        for (int num = 1; num<=9; num++)
+        {
+            if (!row[x][num] && !col[y][num] && !cell[k][num])
+            {
+                row[x][num] = col[y][num] = cell[k][num] = 1;
+                board[x][y] = num + '0';
+                if (solve(x,y+1,board)) return true;
+                row[x][num] = col[y][num] = cell[k][num] = 0;
+                board[x][y] = '.';
+            }
+        }
+        return false;
+    }
+   
+};
+
+
 /*
 static int x = []() {
 	std::ios::sync_with_stdio(false);
