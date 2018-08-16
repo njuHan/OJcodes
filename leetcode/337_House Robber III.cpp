@@ -17,6 +17,26 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+class Solution2 {
+public:
+    int rob(TreeNode* root) {
+        int take, nontake;
+        return search(root, take, nontake);
+    }
+private:
+    // 参数使用引用是为了方便传多个参数
+    // take: 拿该结点； nontake: 不拿该结点
+    int search(TreeNode* node, int& take, int& nontake)
+    {
+        if (!node) { take = nontake = 0; return 0; } //take nontake省略参数初始化， 所以在函数内必须赋值
+        int l1 , l2 , r1 , r2 ;
+        int left = search(node->left, l1, l2), right = search(node->right, r1, r2);
+        take = node->val + l2 + r2;
+        nontake = left + right;
+        return max(take, nontake);
+    }
+};
+
 class Solution {
 public:
 	int rob(TreeNode* root) {

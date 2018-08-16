@@ -8,6 +8,20 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+    int rob(vector<int>& nums) {
+        int take = 0, nontake = 0;
+        for (int num : nums)
+        {
+            int temp = take;
+            take = nontake + num;
+            nontake = max(temp, nontake);
+        }
+        return max(take, nontake);
+    }
+};
+
 class Solution {
 public:
 	int rob(vector<int>& nums) {
