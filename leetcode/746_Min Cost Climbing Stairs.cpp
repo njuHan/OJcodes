@@ -12,6 +12,19 @@
 #include<functional>
 using namespace std;
 
+class Solution2 {
+public:
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n = cost.size(), f1 = cost[0], f2 = cost[1], ans;
+        for (int i=2; i<n; i++)
+        {
+            ans = min(f1, f2) + cost[i];
+            f1 = f2;
+            f2 = ans;
+        }
+        return min(f1, f2);
+    }
+};
 
 class Solution {
 public:
