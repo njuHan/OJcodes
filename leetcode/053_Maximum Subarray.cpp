@@ -11,19 +11,16 @@ using namespace std;
 //dp solutions
 class Solution {
 public:
-	int maxSubArray(vector<int>& nums) {
-		size_t len = nums.size();
-		if (len < 1) return 0;
-		vector<int> dp(len, INT_MIN);
-		dp[0] = nums[0];
-		int maxsum = dp[0];
-		for (size_t i = 1; i < len; i++)
-		{
-			dp[i] = nums[i] + max(0, dp[i - 1]);
-			maxsum = max(maxsum, dp[i]);
-		}
-		return maxsum;
-	}
+    int maxSubArray(vector<int>& nums) {
+        if (nums.size()==0) return 0;
+        int sum = nums[0], ans = nums[0];
+        for (int i=1; i<nums.size(); i++)
+        {
+            sum = sum>0 ? sum + nums[i] : nums[i];
+            ans = max(ans, sum);
+        }
+        return ans;
+    }
 };
 
 // divide and conquer approach , O(n)
