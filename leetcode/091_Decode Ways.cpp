@@ -5,6 +5,24 @@
 #include<string>
 using namespace std;
 
+
+class Solution2 {
+public:
+	int numDecodings(string s) {
+		int n = s.length();
+		if (n == 0 || s[0] == '0') return 0;
+		int f2 = 1, f1 = 1, ans; //dp[0] = dp[1] = 1; dp[i]: i个字符
+		for (int i = 1; i < n; i++)
+		{
+			ans = (s[i] != '0' ? f1 : 0) + (s.substr(i - 1, 2) <= "26"&& s[i - 1] != '0' ? f2 : 0);
+            cout<<ans<<endl;
+			f2 = f1;
+			f1 = ans;
+		}
+		return f1;
+	}
+};
+
 class Solution {
 public:
 	// dp  https://leetcode.com/problems/decode-ways/discuss/30490/7-lines-cpp-solution
