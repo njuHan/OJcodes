@@ -16,15 +16,14 @@ class NumArray {
 public:
 	NumArray(vector<int> nums) {
 		int n = nums.size();
-		curSum = vector<int>(n + 1, 0);
-		int cur = 0;
+		sum = vector<int>(n+1, 0);
 		for (int i = 0; i < n; i++)
-			curSum[i + 1] = (cur += nums[i]);
+			sum[i + 1] = sum[i] + nums[i];
 	}
 
 	int sumRange(int i, int j) {
-		return curSum[j + 1] - curSum[i];
+		return sum[j+1] - sum[i];
 	}
 private:
-	vector<int> curSum;
+	vector<int> sum;
 };
