@@ -3,6 +3,22 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
+
+class Solution2 {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int n = A.size();
+        if (n<3) return 0;
+        int ans = 0, cur = 0;
+        for (int i=0; i + 2 < n; i++)
+        {
+            if (A[i]-A[i+1] == A[i+1]-A[i+2]) ans += ++cur;
+            else cur = 0;
+        }
+        return ans;
+    }
+};
+
 class Solution {
 public:
 	int numberOfArithmeticSlices(vector<int>& A) 
