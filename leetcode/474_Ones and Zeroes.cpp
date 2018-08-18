@@ -12,6 +12,32 @@
 #include<functional>
 using namespace std;
 
+
+class Solution2 {
+public:
+	int findMaxForm(vector<string>& strs, int m, int n) {
+		vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+		for (string str : strs)
+		{
+			int num0 = cntChar(str, '0'), num1 = cntChar(str, '1');
+			for (int i = m; i >= num0; i--)
+				for (int j = n; j >= num1; j--)
+				{
+					dp[i][j] = max(dp[i][j], dp[i - num0][j - num1] + 1);
+				}
+		}
+		return dp[m][n];
+	}
+private:
+	int cntChar(string& str, char ch)
+	{
+		int cnt = 0;
+		for (char& c : str) cnt += (c == ch);
+		return cnt;
+	}
+};
+
+// ----------------以下是几个月前写的，写得不行-------------------------------
 class Solution {
 public:
 	int findMaxForm(vector<string>& strs, int m, int n) {
