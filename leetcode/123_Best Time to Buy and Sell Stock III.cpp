@@ -25,6 +25,26 @@ public:
     }
 };
 
+class Solution3 {
+public:
+    int maxProfit(vector<int>& prices) {
+        int len = prices.size();
+		if (len <= 1) return 0;
+		vector<int> buy(3, INT_MIN);
+		vector<int> sell(3, 0);
+		for (int i = 0; i < len; i++)
+			for (int k = 1; k <= 2; k++)
+			{
+				//将 buy 和 sell 都定义为累积的收益值
+				// buy[k]: 第k次买入的最大累积收益
+				//sell[k]：第k次卖出的最大累积收益
+				buy[k] = max(buy[k], sell[k - 1] - prices[i]);
+				sell[k] = max(sell[k], buy[k] + prices[i]);
+			}
+		return sell[2];
+    }
+};
+
 class Solution {
 public:
 	int maxProfit(vector<int>& prices) {

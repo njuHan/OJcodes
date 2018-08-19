@@ -5,6 +5,23 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+	int maxProfit(vector<int>& prices, int fee) {
+		int n = prices.size();
+		//buy[i] = max(buy[i-1], sell[i-1] - prices[i])
+		//sell[i] = max(sell[i-1], buy[i-1] + prices[i])
+		int buy = -prices[0], sell = 0; //若buy初始化为INT_MIN， 减去fee 会溢出
+		for (int i = 1; i < n; i++)
+		{
+			int prebuy = buy;
+			buy = max(buy, sell - prices[i]);
+			sell = max(sell, prebuy + prices[i] - fee);
+		}
+		return sell;
+	}
+};
+
 class Solution {
 public:
 	int maxProfit(vector<int>& prices, int fee) {
