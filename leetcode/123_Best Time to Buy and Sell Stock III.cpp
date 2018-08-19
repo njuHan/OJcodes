@@ -5,6 +5,24 @@
 #include<algorithm>
 using namespace std;
 
+
+class Solution2 {
+public:
+    // https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/135704/Detail-explanation-of-DP-solution
+    int maxProfit(vector<int>& prices) {
+        vector<int> buy(3, INT_MAX), sell(3, 0);
+        for (int i=0; i<prices.size(); i++)
+            for (int k=1; k<=2; k++)
+            {
+                //we integrate the profit of first transaction into the cost of the second buy, 
+                //then the profit of the second sell will be the total profit of two transactions.
+                buy[k] = min(buy[k], prices[i] - sell[k-1]);
+                sell[k] = max(sell[k], prices[i] - buy[k]);
+            }
+        return sell[2];
+    }
+};
+
 class Solution {
 public:
 	int maxProfit(vector<int>& prices) {
