@@ -5,6 +5,25 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+	int maxProfit(vector<int>& prices) {
+		int n = prices.size();
+		if (n < 2) return 0;
+		vector<int> buy(n, INT_MIN), sell(n, 0);
+		buy[0] = -prices[0]; buy[1] = max(-prices[0], -prices[1]);
+		sell[1] = max(sell[0], buy[0] + prices[1]);
+		for (int i = 2; i < n; i++)
+		{
+            //buy[i]：在第 i 天 以买结束的最大收益
+            //等于 不买，直接继承buy[i-1]， 或者买prices[i]，加上sell[i-2]
+			buy[i] = max(buy[i - 1], sell[i - 2] - prices[i]);
+			sell[i] = max(sell[i - 1], buy[i - 1] + prices[i]);
+		}
+		return sell[n - 1];
+	}
+};
+
 class Solution {
 public:
 	int maxProfit(vector<int>& prices) {

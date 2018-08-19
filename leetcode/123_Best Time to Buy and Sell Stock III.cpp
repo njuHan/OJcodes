@@ -16,7 +16,9 @@ public:
             {
                 //we integrate the profit of first transaction into the cost of the second buy, 
                 //then the profit of the second sell will be the total profit of two transactions.
+				// 第 k 次交易的最低买入价，要考虑进之前交易的收益， 买入价 = prices[i] - sell[k-1]
                 buy[k] = min(buy[k], prices[i] - sell[k-1]);
+				// 前 k 次交易的总收益(1,2,...,k)，是一个累积收益值，与buy[i]的单次买入不同
                 sell[k] = max(sell[k], prices[i] - buy[k]);
             }
         return sell[2];
