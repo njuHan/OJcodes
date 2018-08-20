@@ -7,6 +7,28 @@
 using namespace std;
 
 
+class Solution2 {
+public:
+    bool isValid(string s) {
+        int n = s.length();
+        if (n%2) return false;
+        unordered_map<char, char> l2r;
+        l2r['('] = ')', l2r['['] = ']', l2r['{'] = '}';
+        stack<char> sk;
+        for (char& ch : s)
+        {
+            if (l2r.count(ch)) sk.push(ch);
+            else
+            {
+                if (sk.empty() || l2r[sk.top()]!=ch) return false;
+                sk.pop();
+            }
+        }
+        return sk.empty();
+    }
+};
+
+
 class Solution {
 public:
 	bool isValid(string s) {
