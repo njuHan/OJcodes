@@ -9,6 +9,22 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+    string addStrings(string num1, string num2) {
+        int i = num1.length()-1, j = num2.length()-1, carry = 0;
+        string ans = "";
+        while(i>=0 || j>=0 || carry)
+        {
+            carry += (i>=0 ? num1[i--]-'0' : 0) + (j>=0 ? num2[j--]-'0' : 0);
+            ans += carry%10 + '0';
+            carry /= 10;
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+
 class Solution {
 public:
 	string addStrings(string num1, string num2) {
