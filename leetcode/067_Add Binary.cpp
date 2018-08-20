@@ -9,6 +9,25 @@
 #include<algorithm>
 #include<queue>
 using namespace std;
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string ans;
+        int i=a.length() - 1, j= b.length() - 1, carry = 0, num;
+        while(i>=0 || j>=0 || carry)
+        {
+            num = (i>=0 ? a[i--]-'0' : 0) + (j>=0 ? b[j--]-'0' : 0) + carry;
+            carry = num/2;
+            num %= 2;
+            ans += num+'0';
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+   
+};
+
 class Solution {
 public:
 	string addBinary(string a, string b) {
