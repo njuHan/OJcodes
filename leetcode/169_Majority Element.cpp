@@ -8,6 +8,19 @@
 #include<algorithm>
 using namespace std;
 
+class Solution2 {
+public:
+    int majorityElement(vector<int>& nums) {
+        int ans = nums[0], cnt = 0;
+        for (int num : nums)
+        {
+            if (cnt==0) ans = num;
+            cnt += ans==num ? 1 : -1; 
+        }
+        return ans;
+    }
+};
+
 class Solution {
 public:
 	int majorityElement(vector<int>& nums) {
