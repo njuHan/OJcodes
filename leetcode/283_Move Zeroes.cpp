@@ -11,6 +11,19 @@ using namespace std;
 
 class Solution {
 public:
+    void moveZeroes(vector<int>& nums) {
+        //可以理解为将所有非0元素依次插入 0,1,2,... 的位置
+        int i, j;
+        for (i=0, j=0; j<nums.size(); j++)
+        {
+            if (nums[j]!=0) nums[i++] = nums[j];
+        }
+        while(i < nums.size()) nums[i++] = 0;
+    }
+};
+
+class Solution {
+public:
 	void moveZeroes(vector<int>& nums) {
 		int  i= 0 , j = 0, len = nums.size();
 		if (len < 1) return;
