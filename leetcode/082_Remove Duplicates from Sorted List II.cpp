@@ -15,6 +15,27 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
+class Solution2 {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        for (ListNode** pp = &head; *pp && (*pp)->next; )
+        {
+            int val = (*pp)->val;
+            if (val == (*pp)->next->val)
+            {
+                while ((*pp) && (*pp)->val == val) //×¢Òâ·ÇNULL
+                {
+                    ListNode* next = (*pp)->next;
+                    delete (*pp);
+                    *pp = next;
+                }
+            }
+            else pp = &(*pp)->next;
+        }
+        return head;
+    }
+};
+
 class Solution {
 public:
 	ListNode* deleteDuplicates(ListNode* head)

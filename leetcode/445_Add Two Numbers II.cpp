@@ -10,6 +10,28 @@ struct ListNode
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
+class Solution2 {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        stack<int> sk1, sk2;
+        while(l1) sk1.push(l1->val), l1 = l1->next;
+        while(l2) sk2.push(l2->val), l2 = l2->next;
+        ListNode* head = NULL;
+        int carry = 0;
+        while (!sk1.empty() || !sk2.empty() || carry)
+        {
+            ListNode* node = new ListNode(carry);
+            if (!sk1.empty()) node->val += sk1.top(), sk1.pop();
+            if (!sk2.empty()) node->val += sk2.top(), sk2.pop();
+            carry = node->val/10;
+            node->val %= 10;
+            node->next = head;
+            head = node;
+        }
+        return head;
+    }
+};
+
 class Solution {
 public:
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
