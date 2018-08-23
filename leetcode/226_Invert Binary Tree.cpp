@@ -18,6 +18,22 @@ struct TreeNode {
 
 class Solution {
 public:
+    TreeNode* invertTree(TreeNode* root) {
+        stack<TreeNode*> sk;
+        if (root) sk.push(root);
+        while(!sk.empty())
+        {
+            TreeNode* node = sk.top(); sk.pop();
+            swap(node->left, node->right);
+            if (node->left) sk.push(node->left);
+            if (node->right) sk.push(node->right);
+        }
+        return root;
+    }
+};
+
+class Solution {
+public:
 	TreeNode* invertTree(TreeNode* root) {
 		if (root == NULL) return NULL;
 		TreeNode* left = root->left;
