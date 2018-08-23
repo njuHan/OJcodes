@@ -21,6 +21,23 @@ static int x = []() {
 	return 0;
 }();
 
+class Solution2 {
+public:
+    int findSecondMinimumValue(TreeNode* root) {
+        if (root==NULL) return -1;
+        return find(root, root->val);
+    }
+    int find(TreeNode* node,int minval)
+    {
+        if (node==NULL) return -1;
+        if (node->val!=minval) return node->val;
+        int left = find(node->left, minval), right = find(node->right, minval);
+        if (left==-1 && right==-1) return -1;
+        if (left==-1 || right==-1) return left==-1 ? right : left;
+        return min(left, right);
+    }
+};
+
 class Solution {
 public:
 	int findSecondMinimumValue(TreeNode* root) {
