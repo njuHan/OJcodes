@@ -26,8 +26,8 @@ public:
 	}
 	bool cmp(const TreeNode* lhs, const TreeNode* rhs)
 	{
-		if ((lhs == NULL && rhs != NULL) || (lhs != NULL && rhs == NULL)) return false;
-		if (lhs == NULL && rhs == NULL) return true;
+		if (lhs==NULL && rhs==NULL) return true;
+        if (lhs==NULL || rhs==NULL) return false;
 		return lhs->val == rhs->val && cmp(lhs->left, rhs->left) && cmp(lhs->right, rhs->right);
 	}
 };

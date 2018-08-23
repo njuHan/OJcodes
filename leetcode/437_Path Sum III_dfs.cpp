@@ -14,6 +14,29 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+class Solution2 {
+public:
+    int pathSum(TreeNode* root, int sum) {
+        presum[0] = 1;
+        ans = 0;
+        dfs(root, 0, sum);
+        return ans;
+    }
+private:
+    unordered_map<int, int> presum; //记录当前路径上，所有可能的路径之和 的 数量
+    int ans;
+    void dfs(TreeNode* root, int cursum, int sum) // cursum - presum  = sum
+    {
+        if (root==NULL) return;
+        cursum += root->val;
+        if (presum.count(cursum - sum))  ans += presum[cursum-sum];
+        presum[cursum]++;
+        dfs(root->left, cursum, sum);
+        dfs(root->right, cursum, sum);
+        presum[cursum]--;
+    }
+};
+
 class Solution {
 public:
 	int pathSum(TreeNode* root, int sum) {
