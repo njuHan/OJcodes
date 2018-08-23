@@ -23,6 +23,7 @@ public:
 		if (!root) return 0;
 		int left = minDepth(root->left);
 		int right = minDepth(root->right);
+		// 不能直接return min(left, right) + 1; 这样会返回非叶结点的深度
 		return root->left && root->right?  min(left, right) + 1 : left+right+1;
 	}
 };

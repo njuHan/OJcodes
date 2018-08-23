@@ -17,6 +17,20 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+class Solution3 {
+public:
+    //间隔遍历
+    int rob(TreeNode* root) {
+        if (root==NULL) return 0;
+        int take = root->val;
+        if (root->left) take += rob(root->left->left) + rob(root->left->right);
+        if (root->right) take += rob(root->right->left) + rob(root->right->right);
+        
+        int nontake = rob(root->left) + rob(root->right);
+        return max(take, nontake);
+    }
+};
+
 class Solution2 {
 public:
     int rob(TreeNode* root) {
