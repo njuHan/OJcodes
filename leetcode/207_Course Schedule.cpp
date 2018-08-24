@@ -10,7 +10,30 @@
 #include<queue>
 using namespace std;
 
-
+class Solution2 {
+public:
+	bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+		vis = vector<int>(numCourses, 0);
+		graph = vector<vector<int>>(numCourses);
+		for (auto e : prerequisites) graph[e.second].push_back(e.first);
+		for (int u = 0; u < numCourses; u++)
+			if (vis[u] == 0 && !dfs(u)) return false;
+		return true;
+	}
+private:
+	vector<int> vis;
+	vector<vector<int>> graph;
+	// call dfs(u) iff vis[u]==0 
+	bool dfs(int u)
+	{  
+		vis[u] = -1;
+		for (int v : graph[u])
+			if (vis[v] == -1) return false;
+			else if (vis[v]==0 && dfs(v) == false) return false;
+		vis[u] = 1;
+		return true;
+	}
+};
 
 class Solution {
 public:

@@ -10,6 +10,29 @@
 #include<functional>
 using namespace std;
 
+class Solution2 {
+public:
+	bool isBipartite(vector<vector<int>>& graph) {
+		int n = graph.size();
+		color = vector<int>(n, -1);
+		for (int u = 0; u < graph.size(); u++)
+			if (color[u] == -1 && dfs(u, 0, graph) == false) return false;
+		return true;
+	}
+private:
+	vector<int> color;
+	bool dfs(int u, int c, vector<vector<int>>& graph)
+	{
+        if (color[u] != -1) return color[u]==c;
+        color[u] = c;   
+		for (int v : graph[u])
+		{
+			if (dfs(v, 1 - c, graph) == false) return false;
+		}
+		return true;
+	}
+};
+
 class Solution {
 public:
 	bool isBipartite(vector<vector<int>>& graph) {
