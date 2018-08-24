@@ -7,13 +7,26 @@
 #include<unordered_map>
 using namespace std;
 
-struct TreeNode {
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+int pa[1005];
+class Solution2 {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        int n = edges.size();
+        for (int i=1; i<=n; i++) pa[i] = i;
+        for (auto e : edges)
+        {
+            int x = find(e[0]), y = find(e[1]);
+            if (x==y) return {e[0], e[1]};
+            else pa[x] = y;
+        }
+        return {};
+    }
+private:
+    int find(int x)
+    {
+        return pa[x] == x ? x : pa[x] = find(pa[x]);
+    }
 };
-
 
 class Solution {
 public:
