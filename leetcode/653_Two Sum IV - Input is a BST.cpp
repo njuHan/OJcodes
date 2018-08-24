@@ -11,6 +11,22 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+class Solution2 {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        return dfs(root, k);
+    }
+private:
+    unordered_set<int> st;
+    bool dfs(TreeNode* node, int k)
+    {
+        if (node==NULL) return false;
+        if (st.count(k-node->val)) return true;
+        st.insert(node->val);
+        return dfs(node->left, k) || dfs(node->right, k);
+    }
+};
+
 class Solution {
 public:
 	bool findTarget(TreeNode* root, int k) {

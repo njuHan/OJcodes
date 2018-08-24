@@ -22,6 +22,27 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+class Solution2 {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        int sum = 0;
+        stack<TreeNode*> sk;
+        TreeNode* pre = NULL, *cur = root;
+        // 右根左
+        while(cur || !sk.empty())
+        {
+            while(cur)
+            {
+                sk.push(cur);
+                cur = cur->right;
+            }
+            cur = sk.top(); sk.pop();
+            cur->val = sum = cur->val + sum;
+            cur = cur->left;
+        }
+        return root;
+    }
+};
 
 class Solution {
 public:

@@ -13,6 +13,15 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+class Solution2 {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (!root) return root;
+        if (root->val < p->val && root->val<q->val) return lowestCommonAncestor(root->right, p, q);
+        if (root->val > p->val && root->val>q->val) return lowestCommonAncestor(root->left, p, q);
+        return root;
+    }
+};
 
 class Solution {
 public:
@@ -22,7 +31,7 @@ public:
 		{
 			if (p->val <= root->val && root->val <= q->val)
 				break;
-			else if (p->val < root->val && q->val < root->val)
+			else if (q->val < root->val)
 				root = root->left;
 			else
 				root = root->right;

@@ -15,6 +15,45 @@ struct TreeNode {
 };
 
 
+class Solution2 {
+public:
+    vector<int> findMode(TreeNode* root) {
+        TreeNode *pre = NULL, * cur = root;
+        lastNode = NULL;
+        maxcnt = curcnt = 0;
+        while(cur)
+        {
+            if (cur->left==NULL)
+            {
+                pushAns(cur);
+                cur = cur->right;
+            }
+            else
+            {
+                pre = cur->left;
+                while(pre->right && pre->right!=cur) pre = pre->right;
+                if (pre->right == NULL) pre->right = cur, cur = cur->left;
+                else pre->right = NULL, pushAns(cur), cur = cur->right;
+            }
+        }
+        return ans;
+    }
+private:
+    int maxcnt , curcnt;
+    vector<int> ans;
+    TreeNode* lastNode;
+    void pushAns(TreeNode* cur)
+    {
+        //不能在结点改变的时候输出结果，否则会漏掉最后一个结点。
+        //每遍历一个结点就考虑输出。
+		if (lastNode && lastNode->val == cur->val) curcnt++;
+        else curcnt = 1;
+		if (curcnt>maxcnt) ans.clear(), ans.push_back(cur->val), maxcnt = curcnt;
+		else if (curcnt == maxcnt) ans.push_back(cur->val);
+        lastNode = cur;
+    }     
+};
+
 class Solution {
 public:
 	vector<int> findMode(TreeNode* root) {
