@@ -13,29 +13,31 @@ using namespace std;
 
 class Solution {
 public:
-	int scheduleCourse(vector<vector<int>>& courses) {
-		sort(courses.begin(), courses.end(), [](const vector<int>& v1, const vector<int>& v2) {return v1.back() < v2.back() || (v1.back() == v2.back() && v1[0] < v2[0]); });
-		priority_queue<int> que; //max heap
+    int scheduleCourse(vector<vector<int>>& courses) {
+        // 按结束时间排序， 优先考虑早结束的课程，课程长度小的课程
+        sort(courses.begin(), courses.end(), [](const vector<int>& v1, const vector<int>& v2) {return v1.back() < v2.back() || (v1.back() == v2.back() && v1[0] < v2[0]); });
+		priority_queue<int> que; //max heap，存储课程时间长度，长度最长的课在堆顶
 		int curEnd = 0;
 		for(vector<int> cos : courses)
 		{
-			if (cos[0] > cos[1]) continue;
-			if (curEnd + cos[0] <= cos[1])
+			if (curEnd + cos[0] <= cos[1]) // 有空间可以直接添加
 			{
 				curEnd += cos[0];
 				que.push(cos[0]);
 			}
-			else if (!que.empty() && que.top() > cos[0]) //替换一个比它时间长并且结束时间更早的课
+			else if (!que.empty() && que.top() > cos[0]) //替换堆定时间较长的课程，
 			{
-				curEnd = curEnd - que.top() + cos[0];
+				curEnd = curEnd - que.top() + cos[0]; // 因为按照结束时间排序，肯定满足：curEnd = curEnd - que.top() + cos[0] <= cos[1] 
 				que.pop();
 				que.push(cos[0]);
 			}
 		}
 
 		return que.size();
-	}
+    }
 };
+
+
 
 int main()
 {
