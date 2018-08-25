@@ -129,9 +129,17 @@ void selectSort(vector<int>& nums)
 //左闭右开写起来方便
 void merge(vector<int>& vec, int i, int mid, int j)
 {
+	cout << i << "," << mid << "," << j << endl;
 	// [vec[i], vec[mid]) 左闭右开
+	/*
+	不能写成：
 	vector<int> v1(&vec[i], &vec[mid]);
 	vector<int> v2(&vec[mid], &vec[j]);
+	当j==n时，vec[j]越界。
+	但是string字符串可以写 &str[n], 因为末尾加了0
+	*/
+	vector<int> v1(vec.begin()+i, vec.begin()+mid);
+	vector<int> v2(vec.begin()+mid, vec.begin()+j);
 	int len1 = mid - i, len2 = j - mid;
 	int k = i, p = 0, q = 0;
 	while (p < len1 || q < len2)
@@ -147,6 +155,7 @@ void merge(vector<int>& vec, int i, int mid, int j)
 		}
 	}
 }
+//递归merge sort 自顶向下
 void mergeSort(vector<int>& vec, int i, int j) //[i, j)
 {
 	if (j - i>1)
@@ -161,94 +170,18 @@ void mergeSort(vector<int>& vec, int i, int j) //[i, j)
 //--------------------------------------------------------------------
 /*
  Iterative Merge Sort
+ 自底向上
 */
-/* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
-void merge(int arr[], int l, int m, int r);
-
-// Utility function to find minimum of two integers
-int min(int x, int y) { return (x<y) ? x : y; }
-
-
-/* Iterative mergesort function to sort arr[0...n-1] */
-void mergeSort(int arr[], int n)
+void mergeSort(vector<int>& nums) 
 {
-	int curr_size;  // For current size of subarrays to be merged
-					// curr_size varies from 1 to n/2
-	int left_start; // For picking starting index of left subarray
-					// to be merged
-
-					// Merge subarrays in bottom up manner.  First merge subarrays of
-					// size 1 to create sorted subarrays of size 2, then merge subarrays
-					// of size 2 to create sorted subarrays of size 4, and so on.
-	for (curr_size = 1; curr_size <= n - 1; curr_size = 2 * curr_size)
-	{
-		// Pick starting point of different subarrays of current size
-		for (left_start = 0; left_start<n - 1; left_start += 2 * curr_size)
-		{
-			// Find ending point of left subarray. mid+1 is starting 
-			// point of right
-			int mid = left_start + curr_size - 1;
-
-			int right_end = min(left_start + 2 * curr_size - 1, n - 1);
-
-			// Merge Subarrays arr[left_start...mid] & arr[mid+1...right_end]
-			merge(arr, left_start, mid, right_end);
-		}
-	}
+	int n = nums.size();
+	for (int sz = 1; sz < n; sz += sz)
+		for (int lo = 0; lo < n - sz; lo += sz + sz)
+			merge(nums, lo, lo + sz, min(lo + sz + sz, n));
 }
-/* Function to merge the two haves arr[l..m] and arr[m+1..r] of array arr[] */
-void merge(int arr[], int l, int m, int r)
-{
-	int i, j, k;
-	int n1 = m - l + 1;
-	int n2 = r - m;
 
-	/* create temp arrays */
-	//int L[n1], R[n2];
-	int* L = new int[n1];
-	int* R = new int[n2];
 
-	/* Copy data to temp arrays L[] and R[] */
-	for (i = 0; i < n1; i++)
-		L[i] = arr[l + i];
-	for (j = 0; j < n2; j++)
-		R[j] = arr[m + 1 + j];
 
-	/* Merge the temp arrays back into arr[l..r]*/
-	i = 0;
-	j = 0;
-	k = l;
-	while (i < n1 && j < n2)
-	{
-		if (L[i] <= R[j])
-		{
-			arr[k] = L[i];
-			i++;
-		}
-		else
-		{
-			arr[k] = R[j];
-			j++;
-		}
-		k++;
-	}
-
-	/* Copy the remaining elements of L[], if there are any */
-	while (i < n1)
-	{
-		arr[k] = L[i];
-		i++;
-		k++;
-	}
-
-	/* Copy the remaining elements of R[], if there are any */
-	while (j < n2)
-	{
-		arr[k] = R[j];
-		j++;
-		k++;
-	}
-}
 
 //--------------------------------------------------------------------
 /*
@@ -340,7 +273,7 @@ void heapify(int arr[], int n, int i) //i为根结点, siftdown
 }
 //max heap
 //迭代
-void siftdown(int arr[], int n, int i)
+void siftdown(int arr[], int n, int i) //i为根结点, siftdown
 {
 	int largest = i;  // Initialize largest as root
 	int j = 2 * i + 1;  // left = 2*i + 1
