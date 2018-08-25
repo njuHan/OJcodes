@@ -10,7 +10,9 @@ using namespace std;
 class Solution {
 public:
 	bool isPowerOfTwo(int n) {
-		return n > 0 && (n&(n - 1)) == 0;
+		// 新增test case: n = INT_MIN, n-1溢出
+		long long m = (long long)n;
+        return m && (m&(m-1))==0;
 	}
 	bool isPowerOfThree(int n) {
 		return fmod(log10(n) / log10(3), 1) == 0;
