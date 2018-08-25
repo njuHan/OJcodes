@@ -80,6 +80,50 @@ void instSortR(int a[], int n)
 	a[i + 1] = val;
 }
 
+
+/*
+希尔排序
+对于大规模的数组，插入排序很慢，因为它只能交换相邻的元素，每次只能将逆序
+数量减少 1。
+希尔排序的出现就是为了改进插入排序的这种局限性，它通过交换不相邻的元素，
+每次可以将逆序数量减少大于 1。
+希尔排序使用插入排序对间隔 h 的序列进行排序。通过不断减小 h，最后令 h=1，
+就可以使得整个数组是有序的。
+*/
+void shellSort(vector<int>& nums) 
+{
+	int N = nums.size();
+	int h = 1;
+	while (h < N / 3)
+		h = 3 * h + 1; // 1, 4, 13, 40, ...
+	while (h >= 1) 
+	{
+		for (int i = h; i < N; i++)
+			for (int j = i; j >= h && nums[j]< nums[j -h]; j -= h) //这里和插入排序类似
+				swap(nums[j], nums[j - h]);
+		h = h / 3;
+	}
+}
+
+/*
+选择排序
+选择出数组中的最小元素，将它与数组的第一个元素交换位置。再从剩下的元素中
+选择出最小的元素，将它与数组的第二个元素交换位置。不断进行这样的操作，直
+到将整个数组排序。
+*/
+void selectSort(vector<int>& nums)
+{
+	int n = nums.size();
+	for (int i = 0; i < n; i++)
+	{
+		int minidx = i;
+		for (int j = i + 1; j < n; j++)
+			if (nums[j] < nums[minidx]) minidx = j;
+		swap(nums[minidx], nums[i]);
+	}
+}
+
+
 //merge the sorted two vec: [i,mid), [mid, j)
 // and store the result in vec
 //左闭右开写起来方便
