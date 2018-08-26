@@ -1,24 +1,19 @@
-#include<iostream>
-#include<cstdio>
-#include<vector>
-#include<queue>
-#include<stack>
-#include<string>
-#include<unordered_map>
-#include<unordered_set>
-#include<set>
-#include<list>
-#include<ctime>
-using namespace std;
 
-
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	TreeNode(int x) :
-		val(x), left(NULL), right(NULL) {
-	}
+class Solution {
+public:
+    int MoreThanHalfNum_Solution(vector<int> numbers) {
+        if (numbers.empty()) return 0;
+        int cnt = 0, ans = 0;
+        for (int num : numbers)
+        {
+            if (cnt==0) ans = num, cnt++;
+            else if (ans==num) cnt++;
+            else cnt--;
+        }
+        cnt = 0;
+        for (int num : numbers) cnt += (num==ans);
+        return cnt>numbers.size()/2 ? ans : 0;
+    }
 };
 
 class Solution {
@@ -41,13 +36,3 @@ public:
 		return cnt * 2 > numbers.size() ? num : 0;
 	}
 };
-
-
-int main()
-{
-	string str = "abc";
-	Solution solu;
-	vector<string> ans = solu.Permutation(str);
-	system("pause");
-	return 0;
-}
