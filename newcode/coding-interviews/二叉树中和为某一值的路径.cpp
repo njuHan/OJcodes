@@ -7,6 +7,30 @@ struct TreeNode {
 			val(x), left(NULL), right(NULL) {
 	}
 };*/
+
+class Solution2 {
+public:
+	vector<vector<int> > FindPath(TreeNode* root, int expectNumber) {
+		if (root == NULL) return ans;
+		vector<int> vec;
+		dfs(root, vec, expectNumber);
+		return ans;
+	}
+private:
+	vector<vector<int>> ans;
+	void dfs(TreeNode* p, vector<int>& vec, int sum)
+	{
+		vec.emplace_back(p->val);
+		sum -= p->val;
+		if (!p->left && !p->right && sum == 0) ans.push_back(vec);
+		if (p->left) dfs(p->left, vec, sum);
+		if (p->right) dfs(p->right, vec, sum);
+		vec.pop_back();
+		sum += p->val;
+	}
+
+};
+
 class Solution {
 public:
 	vector<vector<int> > FindPath(TreeNode* root, int expectNumber) {

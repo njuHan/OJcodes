@@ -12,12 +12,37 @@
 using namespace std;
 
 
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	TreeNode(int x) :
-		val(x), left(NULL), right(NULL) {
+class Solution {
+public:
+	vector<string> Permutation(string str) {
+		if (str.length() == 0) return ans;
+		sort(str.begin(), str.end());
+		vis = vector<bool>(str.length(), 0);
+		string s(str.length(), 0);
+		dfs(0, s, str);
+		return ans;
+	}
+private:
+	vector<bool> vis;
+	vector<string> ans;
+	void dfs(int cur, string& permu, string& str)
+	{
+		if (cur == str.length())
+		{
+			ans.emplace_back(permu);
+			return;
+		}
+		for (int i = 0; i < str.length(); i++)
+		{
+			if (i > 0 && !vis[i - 1] && str[i - 1] == str[i]) continue;
+			if (vis[i] == 0)
+			{
+				vis[i] = 1;
+				permu[cur] = str[i];
+				dfs(cur + 1, permu, str);
+				vis[i] = 0;
+			}
+		}
 	}
 };
 

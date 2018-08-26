@@ -55,10 +55,12 @@ public:
 				else
 				{
 					//cout << cur->val;
-					//pre->right = NULL;
-					cur->left = inorder;
-					inorder = cur;
-					cur = cur->right;
+                    //pre->right = NULL;
+                    cur->left = inorder;
+                    //这里可以不需要这一句，应为 inorder->right = cur 在之前就建立好了
+                    //if (inorder) inorder->right = cur;
+                    inorder = cur;
+                    cur = cur->right;
 				}
 			}
 		}
