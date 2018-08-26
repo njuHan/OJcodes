@@ -8,7 +8,7 @@
 #include<algorithm>
 using namespace std;
 
-
+//负数计算补码的 1 的个数
 int cntOne1(int x)
 {
 	int cnt = 0;
