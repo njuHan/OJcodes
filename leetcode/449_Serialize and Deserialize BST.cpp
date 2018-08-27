@@ -26,6 +26,36 @@ struct TreeNode {
 class Codec {
 public:
 
+    // Encodes a tree to a single string.
+	string serialize(TreeNode* root) {
+		if (root == NULL) return "";
+		int* buff = new int;
+		string mid;
+		memcpy(buff, &root->val, sizeof(int));
+		mid.append((char*)buff, sizeof(int));  //这里的字符串没有结尾 0， 需要指定长度
+        
+		return mid + this->serialize(root->left) + this->serialize(root->right);
+	}
+
+	// Decodes your encoded data to tree.
+	TreeNode* deserialize(string data) {
+		int len = data.size() / 4; 
+		if (len < 1) return NULL;
+		const int* pos = (const int*)data.c_str();
+		int rootVal = pos[0];
+		TreeNode* root = new TreeNode(rootVal);
+		int i = 1;
+		while (i < len && pos[i] < rootVal) i++;
+		if (i < len) root->right = deserialize(string(&data[i * 4], &data[len * 4]));
+		if (1 < i) root->left = deserialize(string(&data[4], &data[i * 4]));
+		return root;
+	}
+};
+
+
+class Codec {
+public:
+
 	// Encodes a tree to a single string.
 	string serialize(TreeNode* root) {
 		if (root == NULL) return "";
