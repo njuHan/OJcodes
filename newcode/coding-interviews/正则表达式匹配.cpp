@@ -16,7 +16,7 @@ public:
 	bool match(char* str, char* pattern)
 	{
 		int len1 = strlen(str), len2 = strlen(pattern);
-		vector<vector<bool>> dp(len1 + 1, vector<bool>(len2, 0));
+		vector<vector<bool>> dp(len1 + 1, vector<bool>(len2 + 1, 0));
 		dp[0][0] = 1;
 		for (int i = 0; i <= len1; i++)
 		{

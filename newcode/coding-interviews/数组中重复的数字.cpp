@@ -1,17 +1,3 @@
-#include<iostream>
-#include<cstdio>
-#include<vector>
-#include<queue>
-#include<stack>
-#include<string>
-#include<unordered_map>
-#include<unordered_set>
-#include<set>
-#include<list>
-#include<sstream>
-using namespace std;
-
-
 
 class Solution {
 public:
@@ -41,7 +27,8 @@ public:
 		}
 		return false;
 	}
-	// modify num + len
+	// 不能用 nums[idx] = -nums[idx], 因为 nums[idx]可能等于 0
+	// 使用  nums[idx] += len
 	bool duplicate_1(int numbers[], int length, int* duplication)
 	{
 		if (length <= 1) return false;
