@@ -1,16 +1,20 @@
-#include<iostream>
-#include<cstdio>
-#include<vector>
-#include<queue>
-#include<stack>
-#include<string>
-#include<unordered_map>
-#include<unordered_set>
-#include<set>
-#include<list>
-#include<sstream>
-using namespace std;
-
+class Solution {
+public:
+    vector<int> multiply(const vector<int>& A) {
+        int len = A.size();
+		if (len < 2) return{};
+		vector<int> B(len, 1);
+		int left = 1, right = 1;
+        for (int i=0; i<len; i++)
+        {
+            B[i] *= left;
+            B[len-1-i] *= right;
+            left *= A[i];
+            right *= A[len-1-i];
+        }
+		return B;
+    }
+};
 
 class Solution {
 public:
