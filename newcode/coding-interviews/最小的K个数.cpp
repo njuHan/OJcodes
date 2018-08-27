@@ -30,7 +30,7 @@ public:
 		for (int num : input)
 		{
 			if (maxHeap.size() < k) maxHeap.push(num);
-			else
+			else if(maxHeap.top()>num)
 			{
 				maxHeap.push(num);
 				maxHeap.pop();

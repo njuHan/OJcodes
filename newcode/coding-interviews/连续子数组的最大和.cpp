@@ -1,24 +1,17 @@
-#include<iostream>
-#include<cstdio>
-#include<vector>
-#include<queue>
-#include<stack>
-#include<string>
-#include<unordered_map>
-#include<unordered_set>
-#include<set>
-#include<list>
-#include<ctime>
-using namespace std;
-
-
-struct TreeNode {
-	int val;
-	struct TreeNode *left;
-	struct TreeNode *right;
-	TreeNode(int x) :
-		val(x), left(NULL), right(NULL) {
-	}
+class Solution {
+public:
+    int FindGreatestSumOfSubArray(vector<int> array) {
+        int n = array.size();
+        if (n<1) return 0;
+        int ans = array[0], acc = array[0];
+        for (int i=1; i<n; i++)
+        {
+            if (acc>0) acc += array[i];
+            else acc = array[i];
+            ans = max(ans, acc);
+        }
+        return ans;
+    }
 };
 class Solution {
 public:
@@ -35,11 +28,3 @@ public:
 	}
 };
 
-int main()
-{
-	string str = "abc";
-	Solution solu;
-	vector<string> ans = solu.Permutation(str);
-	system("pause");
-	return 0;
-}

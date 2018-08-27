@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/number-of-digit-one/discuss/64381/4+-lines-O(log-n)-C++JavaPython
+
 class Solution {
 public:
     int NumberOf1Between1AndN_Solution(int n)
