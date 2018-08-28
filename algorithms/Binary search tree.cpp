@@ -56,16 +56,19 @@ TreeNode* deleteMin(TreeNode* root)
 TreeNode* deleteNode(TreeNode* root, int val)
 {
 	if (root == NULL) return NULL;
-	if (root->val < val) return deleteNode(root->right, val);
-	else if (root->val > val) return deleteNode(root->left, val);
-
-	if (root->left == NULL) root = root->right;
-	else if (root->right == NULL) root = root->left;
+	if (root->val < val) root->right =  deleteNode(root->right, val);
+	else if (root->val > val) root->left = deleteNode(root->left, val);
 	else
 	{
-		TreeNode* temp = root;
-		root = getMin(root->right);
-		root->right = deleteMin(root->right);
-		root->left = temp->left;
-	}
+		if (root->left == NULL) return root->right;
+		else if (root->right == NULL) return root->left;
+		else
+		{
+			TreeNode* temp = root;
+			root = getMin(temp->right);
+			root->right = deleteMin(temp->right);
+			root->left = temp->left;
+		}
+	}		
+	return root;
 }
