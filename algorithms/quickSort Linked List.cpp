@@ -97,8 +97,8 @@ void printNode(ListNode* head)
 }
 
 //rewrite
-//head : 带排序链表的头
-//tail: 带排序链表最后一个结点的下一个结点
+//head : 待排序链表的头
+//tail: 待排序链表最后一个结点的下一个结点
 //二级指针 root: *root == 排序后的链表头
 void quickSort(ListNode* head, ListNode* tail, ListNode** root)
 {

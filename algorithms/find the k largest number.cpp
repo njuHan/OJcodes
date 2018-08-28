@@ -30,7 +30,7 @@ int klargest(vector<int> nums, int k)
 		if (pivot < k - 1)
 			x = pivot + 1;
 		else
-			y = pivot - 1;
+			y = pivot;
 		pivot = patition(nums, x, y);
 	}
 	return nums[k - 1];

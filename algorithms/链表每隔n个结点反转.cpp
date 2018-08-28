@@ -15,7 +15,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-//每隔n个元素反转
+//每隔n个元素反转， n=k
 void reverseN(ListNode** head, int k) //必须使用指针的指针
 {
 	if (k == 1 || *head == NULL) return;
