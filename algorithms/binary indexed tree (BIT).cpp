@@ -1,31 +1,23 @@
-#include<cstdio>
-#include<cstring>
-#include<iostream>
-#include<string>
-#include<vector>
-#include<algorithm>
-using namespace std;
-
 /*
-¶ş²æË÷ÒıÊı binary indexed tree (BIT)
-¸ø¶¨Êı×éA1£¬ A2, ... ,An
-Ö§³ÖÁ½ÖÖ²Ù×÷£º 
-Add(x,d): ÈÃAx Ôö¼Ó d
-query(LR): ¼ÆËã AL+...+AR
+äºŒå‰ç´¢å¼•æ•° binary indexed tree (BIT)
+ç»™å®šæ•°ç»„A1ï¼Œ A2, ... ,An
+æ”¯æŒä¸¤ç§æ“ä½œï¼š
+Add(x,d): è®©Ax å¢åŠ  d
+query(LR): è®¡ç®— AL+...+AR
 */
 
 const int maxn = 105;
-int A[maxn+1]; //·¶Î§ £º [1,maxn]
+int A[maxn+1]; //èŒƒå›´ ï¼š [1,maxn]
 int C[maxn+1];
 // C[i] = A[i-lowbit(i)+1] + ...+ A[i]
 
-//ÇóÏÂ±ê x µÄlowebit
+//æ±‚ä¸‹æ ‡ x çš„lowebit
 int lowbit(int x)
 {
 	return x&(-x);
 }
 
-// °´ÕÕC µÄ¶¨ÒåÔ¤´¦ÀíC
+// æŒ‰ç…§C çš„å®šä¹‰é¢„å¤„ç†C
 void getC()
 {
 	for (int i = 1; i < maxn; i++)
@@ -60,21 +52,13 @@ void add(int x, int d)
 	}
 }
 
-// Ê¹ÓÃ add Ô¤´¦Àí C
-// ÖÃÁã A,C, Ö´ĞĞmaxn´Î add
-// ¸üĞÂ A
+// ä½¿ç”¨ add é¢„å¤„ç† C
+// ç½®é›¶ A,C, æ‰§è¡Œmaxnæ¬¡ add
+// æ›´æ–° A
 void initC()
 {
 	for (int i = 1; i <= maxn; i++)
 	{
 		add(i, A[i]);
 	}
-}
-
-int main() {
-
-
-
-	system("pause");
-	return 0;
 }

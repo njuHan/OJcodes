@@ -10,7 +10,7 @@ using namespace std;
 const int INF = 100000;
 const int maxn = 100;
 
-//dijkstra »ù´¡°æ O(n*n):
+//dijkstra åŸºç¡€ç‰ˆ O(n*n):
 int w[maxn][maxn]; //w[u][v]: weight of (u,v)
 bool vis[maxn]; // is visited
 int d[maxn];
@@ -37,10 +37,10 @@ void dijkstraBase(int src)
 				d[i] = min(d[i], d[x] + w[x][i]);
 		}
 	}
-	
+
 }
 
-//´æ´¢Ã¿¸ö½áµã³ö·¢µÄ±ß£¬ÀûÓÃÓÅÏÈ¶ÓÁĞ£¬Ñ¡Ôñd[]×îĞ¡µÄ½áµã
+//å­˜å‚¨æ¯ä¸ªç»“ç‚¹å‡ºå‘çš„è¾¹ï¼Œåˆ©ç”¨ä¼˜å…ˆé˜Ÿåˆ—ï¼Œé€‰æ‹©d[]æœ€å°çš„ç»“ç‚¹
 //O(mlogn)
 struct Edge
 {
@@ -52,10 +52,10 @@ struct HeapNode
 {
 	int d, u;
 	HeapNode(int d, int u) :d(d), u(u) {}
-	//ÓÅÏÈ¼¶<·ûºÅ£¬ ÓÅÏÈ¼¶´óµÄ·Å¶ÓÁĞÊ×
-	bool operator < (const HeapNode& rhs) const // ÕâÀï±ØĞëÓĞconst
+	//ä¼˜å…ˆçº§<ç¬¦å·ï¼Œ ä¼˜å…ˆçº§å¤§çš„æ”¾é˜Ÿåˆ—é¦–
+	bool operator < (const HeapNode& rhs) const // è¿™é‡Œå¿…é¡»æœ‰const
 	{
-		return d > rhs.d; // dÖµ½Ï´óµÄÓÅÏÈ¼¶µÍ£¬ ·Å¶ÓÁĞ¿¿ºó
+		return d > rhs.d; // då€¼è¾ƒå¤§çš„ä¼˜å…ˆçº§ä½ï¼Œ æ”¾é˜Ÿåˆ—é å
 	}
 };
 struct Dijkstra
@@ -65,7 +65,7 @@ struct Dijkstra
 	vector<int> G[maxn];
 	bool done[maxn];
 	int d[maxn];
-	int p[maxn]; //×î¶ÌÂ·¾¶µÄÉÏÒ»Ìõ±ß
+	int p[maxn]; //æœ€çŸ­è·¯å¾„çš„ä¸Šä¸€æ¡è¾¹
 
 	void init(int n)
 	{
@@ -77,7 +77,7 @@ struct Dijkstra
 	void addEdge(int u, int v, int dist)
 	{
 		edges.push_back(Edge(u, v, dist));
-		this->m = edges.size();  //»ñÈ¡ĞÂ±ßµÄÏÂ±ê£¬Í¬Ê±¼ÇÂ¼±ßÊım
+		this->m = edges.size();  //è·å–æ–°è¾¹çš„ä¸‹æ ‡ï¼ŒåŒæ—¶è®°å½•è¾¹æ•°m
 		G[u].push_back(this->m - 1);
 	}
 
@@ -155,6 +155,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-
-

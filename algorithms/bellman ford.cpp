@@ -14,12 +14,12 @@ int u[maxn];
 int v[maxn];
 int w[maxn];
 
-//bellman ford 
-int n, m; // µãÊı ±ßÊı
+//bellman ford
+int n, m; // ç‚¹æ•° è¾¹æ•°
 void bellmanFord(int src)
 {
 	for (int i = 0; i < n; i++) d[i] = (i == src ? 0 : INF);
-	//¶ÔÃ¿Ìõ±ß ËÉ³Ú n-1 ´Î
+	//å¯¹æ¯æ¡è¾¹ æ¾å¼› n-1 æ¬¡
 	for (int i=0; i<n-1; i++)
 		for (int e = 0; e < m; e++)
 		{
@@ -32,10 +32,10 @@ void bellmanFord(int src)
 }
 
 
-//Ê¹ÓÃFIFO¶ÓÁĞÓÅ»¯
-//Ô´µãsµ½´ïÆäËûµÄµãµÄ×î¶ÌÂ·¾¶ÖĞµÄµÚÒ»Ìõ±ß£¬±Ø¶¨ÊÇÔ´µãsÏàÁ¬µÄ±ß£¬
-//Òò´Ë£¬µÚÒ»´ÎËÉ³Ú£¬ÎÒÃÇÖ»ĞèÒª½«ÕâĞ©±ßËÉ³ÚÒ»ÏÂ¼´¿É¡£
-//µÚ¶ş´ÎËÉ³ÚµÄ±ß£¬±Ø¶¨ÊÇµÚÒ»´ÎËÉ³ÚµÄ±ßÏàÁÚµÄ±ß,ÕâÊÇSPFAËã·¨µÄ¹Ø¼ü
+//ä½¿ç”¨FIFOé˜Ÿåˆ—ä¼˜åŒ–
+//æºç‚¹såˆ°è¾¾å…¶ä»–çš„ç‚¹çš„æœ€çŸ­è·¯å¾„ä¸­çš„ç¬¬ä¸€æ¡è¾¹ï¼Œå¿…å®šæ˜¯æºç‚¹sç›¸è¿çš„è¾¹ï¼Œ
+//å› æ­¤ï¼Œç¬¬ä¸€æ¬¡æ¾å¼›ï¼Œæˆ‘ä»¬åªéœ€è¦å°†è¿™äº›è¾¹æ¾å¼›ä¸€ä¸‹å³å¯ã€‚
+//ç¬¬äºŒæ¬¡æ¾å¼›çš„è¾¹ï¼Œå¿…å®šæ˜¯ç¬¬ä¸€æ¬¡æ¾å¼›çš„è¾¹ç›¸é‚»çš„è¾¹,è¿™æ˜¯SPFAç®—æ³•çš„å…³é”®
 
 struct Edge
 {
@@ -45,12 +45,12 @@ struct Edge
 struct BellmanFord
 {
 	vector<Edge> edges;
-	vector<int> G[maxn]; //G[u]´æ·Å ´Óu³ö·¢µÄ±ß
+	vector<int> G[maxn]; //G[u]å­˜æ”¾ ä»uå‡ºå‘çš„è¾¹
 	int n, m;
 	int d[maxn];
-	bool inq[maxn]; //ÊÇ·ñÔÚ¶ÓÁĞÖĞ
-	int p[maxn]; //p[i]:×î½üÂ·¾¶ÉÏ£¬½áµãiµÄÉÏÒ»Ìõ±ß
-	int cnt[maxn]; //½áµã¼ÓÈë¶ÓÁĞ´ÎÊı¼ÆÊı
+	bool inq[maxn]; //æ˜¯å¦åœ¨é˜Ÿåˆ—ä¸­
+	int p[maxn]; //p[i]:æœ€è¿‘è·¯å¾„ä¸Šï¼Œç»“ç‚¹içš„ä¸Šä¸€æ¡è¾¹
+	int cnt[maxn]; //ç»“ç‚¹åŠ å…¥é˜Ÿåˆ—æ¬¡æ•°è®¡æ•°
 
 	void init(int n)
 	{
@@ -82,13 +82,13 @@ struct BellmanFord
 				Edge& e = edges[i];
 				if (d[u] < INF && d[e.to] > d[u] + e.dist)
 				{
-					d[e.to] = d[u] + e.dist; //ËÉ³Ú
-					p[e.to] = i;  //¼ÇÂ¼"¸¸±ß"
+					d[e.to] = d[u] + e.dist; //æ¾å¼›
+					p[e.to] = i;  //è®°å½•"çˆ¶è¾¹"
 					if (inq[e.to] == 0)
 					{
 						inq[e.to] = 1;
 						que.push(e.to);
-						if (++cnt[e.to] > n) //ÅĞ¶Ï¸º»·
+						if (++cnt[e.to] > n) //åˆ¤æ–­è´Ÿç¯
 							return false;
 					}
 				}
@@ -143,6 +143,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-
-

@@ -16,12 +16,12 @@ using namespace std;
 const int maxn = 100;
 int a[maxn], sum[maxn << 2], add[maxn << 2];
 
-//ÏòÉÏ¸üÐÂ½áµã
+//å‘ä¸Šæ›´æ–°ç»“ç‚¹
 void pushUp(int rt)
 {
 	sum[rt] = sum[lson(rt)] + sum[rson(rt)];
 }
-//ÏòÏÂÍÆÇø¼ä¸üÐÂ±ê¼Ç
+//å‘ä¸‹æŽ¨åŒºé—´æ›´æ–°æ ‡è®°
 void pushDown(int rt, int ln, int rn)
 {
 	if (add[rt])
@@ -34,7 +34,7 @@ void pushDown(int rt, int ln, int rn)
 	}
 }
 
-//½¨Ê÷
+//å»ºæ ‘
 void build(int l, int r, int rt)
 {
 	if (l == r)
@@ -48,10 +48,10 @@ void build(int l, int r, int rt)
 	pushUp(rt);
 }
 
-//µãÔöÁ¿ÐÞ¸Ä
-void update(int x, int c, int l, int r, int rt) //ÓÐÐ§µ÷ÓÃÊ±±ØÐëxÔÚÇø¼ä[l,r]ÄÚ
+//ç‚¹å¢žé‡ä¿®æ”¹
+void update(int x, int c, int l, int r, int rt) //æœ‰æ•ˆè°ƒç”¨æ—¶å¿…é¡»xåœ¨åŒºé—´[l,r]å†…
 {
-	if (l==r) //Ò¶½áµã£¬Ö±½ÓÐÞ¸Ä
+	if (l==r) //å¶ç»“ç‚¹ï¼Œç›´æŽ¥ä¿®æ”¹
 	{
 		sum[rt] += c;
 		return;
@@ -63,17 +63,17 @@ void update(int x, int c, int l, int r, int rt) //ÓÐÐ§µ÷ÓÃÊ±±ØÐëxÔÚÇø¼ä[l,r]ÄÚ
 	pushUp(rt);
 }
 
-//Çø¼äÔöÁ¿ÐÞ¸Ä [x,y]Çø¼äµÄÊý+c
-void update(int x, int y, int c, int l, int r, int rt) 
+//åŒºé—´å¢žé‡ä¿®æ”¹ [x,y]åŒºé—´çš„æ•°+c
+void update(int x, int y, int c, int l, int r, int rt)
 {
-	if (x <= l && r <= y) //ÍêÈ«¸²¸Ç¸Ã½áµãÇø¼ä
+	if (x <= l && r <= y) //å®Œå…¨è¦†ç›–è¯¥ç»“ç‚¹åŒºé—´
 	{
 		sum[rt] += c * (r - l + 1);
 		add[rt] += c;
 		return;
 	}
 	int m = mid(l, r);
-	//Èç¹ûÌâÄ¿ÖÐÊÇµãÐÞ¸ÄºÍÇø¼äÐÞ¸Ä»ìºÏµÄ»°£¬ÄÇÃ´µãÐÞ¸ÄÖÐÒ²ÐèÒªPushDown¡£
+	//å¦‚æžœé¢˜ç›®ä¸­æ˜¯ç‚¹ä¿®æ”¹å’ŒåŒºé—´ä¿®æ”¹æ··åˆçš„è¯ï¼Œé‚£ä¹ˆç‚¹ä¿®æ”¹ä¸­ä¹Ÿéœ€è¦PushDownã€‚
 	pushDown(rt, m - l + 1, r - m);
 	if (x <= m) update(x, y, c, l, m, lson(rt));
 	if (y >= m + 1) update(x, y, c, m + 1, r, rson(rt));
@@ -100,12 +100,9 @@ int main()
 	build(0, n - 1, 1);
 	update(0, n - 1, 2, 0, n - 1, 1);
 	update(0, 2, 0, n - 1, 1);
-	
+
 	int ans = query(0, n-1,0,  n - 1, 1);
 	cout << ans;
 	system("pause");
 	return 0;
 }
-
-
-

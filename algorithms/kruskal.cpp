@@ -15,7 +15,7 @@ int p[n];  //union find set
 int u[m];  //edge(u,v)
 int v[m];
 
-//╪Д╫сеепРё╛ еепР╨Сё╛ ╢сх╗жьп║╣д╠ъ╣доб╠Й ╣╫ х╗жь╢С╣д╠ъ╣доб╠Й
+//И≈╢Ф▌╔Ф▌▓Е╨▐О╪▄ Ф▌▓Е╨▐Е░▌О╪▄ Д╩▌Ф²┐И┤█Е╟▐Г └Х╬╧Г └Д╦▀Ф═┤ Е┬╟ Ф²┐И┤█Е╓╖Г └Х╬╧Г └Д╦▀Ф═┤
 int cmp(const int& i, const int& j)
 {
 	return w[i] < w[j];
@@ -28,9 +28,9 @@ int findSet(int x)
 
 int kruskal()
 {
-	for (int i = 0; i < n; i++) p[i] = i;  //ЁУй╪╩╞а╛м╗╥жа©
-	for (int i = 0; i < m; i++) r[i] = i; //ЁУй╪╩╞╠ъоб╠Й
-	sort(r, r + m, cmp); //╪Д╫сеепР
+	for (int i = 0; i < n; i++) p[i] = i;  //Е┬²Е╖▀Е▄√Х©·И─ Е┬├И┤▐
+	for (int i = 0; i < m; i++) r[i] = i; //Е┬²Е╖▀Е▄√Х╬╧Д╦▀Ф═┤
+	sort(r, r + m, cmp); //И≈╢Ф▌╔Ф▌▓Е╨▐
 
 	int ans = 0;
 	for (int i = 0; i < m; i++)

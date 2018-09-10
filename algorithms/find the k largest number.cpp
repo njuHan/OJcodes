@@ -8,7 +8,7 @@
 #include<algorithm>
 using namespace std;
 
-//¿ìÅÅË¼Ïë£º
+//å¿«æ’æ€æƒ³ï¼š
 int patition(vector<int>& nums, int x, int y)
 {
 	int greater = x, val = nums[x];
@@ -36,9 +36,9 @@ int klargest(vector<int> nums, int k)
 	return nums[k - 1];
 }
 
- 
-// O(1)¿Õ¼ä¸´ÔÓ¶È£¬ ²»ÄÜ¸Ä±äÊı×é£¬¼ÙÈçÓĞÖØ¸´ÔªËØ
-// O(k*n) Ê±¼ä
+
+// O(1)ç©ºé—´å¤æ‚åº¦ï¼Œ ä¸èƒ½æ”¹å˜æ•°ç»„ï¼Œå‡å¦‚æœ‰é‡å¤å…ƒç´ 
+// O(k*n) æ—¶é—´
 int getK(vector<int> nums, int k)
 {
 	if (k < 1 || nums.size() < k) return 0;
@@ -79,5 +79,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-
