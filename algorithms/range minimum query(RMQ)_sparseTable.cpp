@@ -7,37 +7,37 @@
 using namespace std;
 
 /*
-·¶Î§×îĞ¡ÖµÎÊÌâ range minimum query (RMQ)
-²éÑ¯ ·¶Î§[L,R]µÄ×îĞ¡Öµ£º  min{A[L], ..., A[R]}
-d[i][j]: ´Ó A[i]¿ªÊ¼£¬ ³¤¶ÈÎª1<<jµÄ·¶Î§µÄ×îĞ¡Öµ [i, i+(1<<j)-1]
+èŒƒå›´æœ€å°å€¼é—®é¢˜ range minimum query (RMQ)
+æŸ¥è¯¢ èŒƒå›´[L,R]çš„æœ€å°å€¼ï¼š  min{A[L], ..., A[R]}
+d[i][j]: ä» A[i]å¼€å§‹ï¼Œ é•¿åº¦ä¸º1<<jçš„èŒƒå›´çš„æœ€å°å€¼ [i, i+(1<<j)-1]
 */
 
 const int maxn = 100;
 //int A[n];
 vector<int> A;
 int d[maxn][maxn+1];
-//Ô¤´¦Àí O(nlogn)
+//é¢„å¤„ç† O(nlogn)
 void RMQ_init(const vector<int> A)
 {
 	int n = A.size();
 	for (int i = 0; i < n; i++) d[i][0] = A[i]; //j==0
 
-	for (int j = 1; (1 << j) <= n; j++)   
+	for (int j = 1; (1 << j) <= n; j++)
 	{
 		for (int i=0; i+(1<<j)-1 < n; i++) //i + (1<<j) <= n
 		{
-			d[i][j] = min(d[i][j - 1], d[i + (1 << (j - 1))][j - 1]);  
+			d[i][j] = min(d[i][j - 1], d[i + (1 << (j - 1))][j - 1]);
 		}
 	}
 }
-//²éÑ¯O(1)
+//æŸ¥è¯¢O(1)
 int rmq(int L, int R)
 {
 	int k = 0;
 	// find the max k s.t. (1<<k) <= R-L+1
 	while (1 << (k + 1) <= R - L + 1) k++;
 
-	return min(d[L][k], d[R - (1 << k) + 1][k]); 
+	return min(d[L][k], d[R - (1 << k) + 1][k]);
 
 }
 

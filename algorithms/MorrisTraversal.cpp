@@ -24,7 +24,7 @@ void inorderMorrisTraversal(TreeNode *root)
 	TreeNode* pre = NULL, *cur = root;
 	while (cur)
 	{
-		if (cur->left == NULL) //Êä³ö×ó½áµã
+		if (cur->left == NULL) //è¾“å‡ºå·¦ç»“ç‚¹
 		{
 			cout << cur->val;
 			cur = cur->right;
@@ -36,21 +36,21 @@ void inorderMorrisTraversal(TreeNode *root)
 			{
 				pre = pre->right;
 			}
-			if (pre->right == NULL) //½¨Á¢·µ»ØÖ¸Õë
+			if (pre->right == NULL) //å»ºç«‹è¿”å›æŒ‡é’ˆ
 			{
 				pre->right = cur;
-				cur = cur->left; //¼ÌĞø½¨Á¢×ó×ÓÊ÷·µ»ØÖ¸Õë
+				cur = cur->left; //ç»§ç»­å»ºç«‹å·¦å­æ ‘è¿”å›æŒ‡é’ˆ
 			}
-			else //if (pre->right == cur) //Êä³ö¸ù½áµã£¬ Ïû³ı·µ»ØÖ¸Õë
-			{  //ÒÑ¾­±éÀúÍê×ó×ÓÊ÷
+			else //if (pre->right == cur) //è¾“å‡ºæ ¹ç»“ç‚¹ï¼Œ æ¶ˆé™¤è¿”å›æŒ‡é’ˆ
+			{  //å·²ç»éå†å®Œå·¦å­æ ‘
 				pre->right = NULL;
-				cout << cur->val;  //Êä³ö¸ù½áµã
-				cur = cur->right; //¿¼ÂÇÓÒ×ÓÊ÷
+				cout << cur->val;  //è¾“å‡ºæ ¹ç»“ç‚¹
+				cur = cur->right; //è€ƒè™‘å³å­æ ‘
 			}
 		}
 	}
 }
-//Ç°Ğò±éÀú
+//å‰åºéå†
 void preorderMorrisTraversal(TreeNode *root)
 {
 	TreeNode* pre = NULL, *cur = root;
@@ -70,7 +70,7 @@ void preorderMorrisTraversal(TreeNode *root)
 			}
 			if (pre->right == NULL)
 			{
-				cout << cur; //ÏÈĞò£¬ÔÚ½¨Á¢·µ»ØÖ¸ÕëÊ±£¬ ÏÈÊä³ö¸ù½áµã
+				cout << cur; //å…ˆåºï¼Œåœ¨å»ºç«‹è¿”å›æŒ‡é’ˆæ—¶ï¼Œ å…ˆè¾“å‡ºæ ¹ç»“ç‚¹
 				pre->right = cur;
 				cur = cur->left;
 			}
@@ -84,7 +84,7 @@ void preorderMorrisTraversal(TreeNode *root)
 	}
 }
 
-//ºóĞò±éÀú£¬²Ù×÷±È½Ï¸´ÔÓ
+//ååºéå†ï¼Œæ“ä½œæ¯”è¾ƒå¤æ‚
 void reverse(TreeNode *from, TreeNode *to) // reverse the tree nodes 'from' -> 'to'.
 {
 	if (from == to)
@@ -148,7 +148,7 @@ void postorderMorrisTraversal(TreeNode *root) {
 	}
 }
 
-//ÓÃÕ»ÊµÏÖºóĞò±éÀú
+//ç”¨æ ˆå®ç°ååºéå†
 
 vector<int> postorderTraversal(TreeNode* root) {
 	vector<int> ans;
@@ -180,8 +180,8 @@ vector<int> postorderTraversal(TreeNode* root) {
 	return ans;
 }
 
-//ÄÚÑ­»· while Ò»Ö±Ïò×ó×ß
-//Ç°Ğò£¬ ÖĞĞò£¬ ºóĞò ¿ò¼ÜÀàËÆ
+//å†…å¾ªç¯ while ä¸€ç›´å‘å·¦èµ°
+//å‰åºï¼Œ ä¸­åºï¼Œ ååº æ¡†æ¶ç±»ä¼¼
 vector<int> postorderTraversal2(TreeNode* root) {
 	vector<int> ans;
 	if (root == NULL) return ans;
@@ -216,7 +216,7 @@ vector<int> preorderTraversal(TreeNode* root) {
         stack<TreeNode*> sk;
         while(root || !sk.empty())
         {
-            while(root) 
+            while(root)
             {
                 sk.push(root);
                 ans.emplace_back(root->val);
@@ -227,13 +227,13 @@ vector<int> preorderTraversal(TreeNode* root) {
         }
         return ans;
     }
-	
+
 vector<int> inorderTraversal(TreeNode* root) {
         vector<int> ans;
         stack<TreeNode*> sk;
         while(root || !sk.empty())
         {
-            while(root) 
+            while(root)
             {
                 sk.push(root);
                 root = root->left;
@@ -244,5 +244,5 @@ vector<int> inorderTraversal(TreeNode* root) {
         }
         return ans;
     }
-	
+
 	

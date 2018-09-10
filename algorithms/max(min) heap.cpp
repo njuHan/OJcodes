@@ -1,7 +1,7 @@
 
 // To heapify a subtree rooted with node i which is
 // an index in arr[]. n is size of heap
-void heapify(int arr[], int n, int i) //iÎª¸ù½áµã, siftdown
+void heapify(int arr[], int n, int i) //iä¸ºæ ¹ç»“ç‚¹, siftdown
 {
 	int largest = i;  // Initialize largest as root
 	int l = 2 * i + 1;  // left = 2*i + 1
@@ -25,43 +25,43 @@ void heapify(int arr[], int n, int i) //iÎª¸ù½áµã, siftdown
 	}
 }
 //max heap
-//µü´ú
+//è¿­ä»£
 void siftdown(int arr[], int n, int i)
 {
 	int j = 2 * i + 1;  // left = 2*i + 1
-	int temp = arr[i]; //µ÷ÕûµÄÔªËØÒ»Ö±¶¼ÊÇ temp
+	int temp = arr[i]; //è°ƒæ•´çš„å…ƒç´ ä¸€ç›´éƒ½æ˜¯ temp
 	while (j<n)
 	{
-		if (j+1<n && arr[j+1] > arr[j]) j++; //Ö¸Ïò½Ï´óµÄ×Ó½áµã
+		if (j+1<n && arr[j+1] > arr[j]) j++; //æŒ‡å‘è¾ƒå¤§çš„å­ç»“ç‚¹
 		if (temp <arr[j] ) {arr[i] =  arr[j]; i = j; j = 2*i + 1;}
 		else break;
 	}
-	arr[i] = temp; //µ÷Õû½áÊø£¬ »ØËÍtemp
+	arr[i] = temp; //è°ƒæ•´ç»“æŸï¼Œ å›é€temp
 }
 
 // max heap siftup
-void siftup(int arr[], int son) 
+void siftup(int arr[], int son)
 {
 	int j = son;
-	int i = (j-1)/2; //i Îª¸¸½áµã
+	int i = (j-1)/2; //i ä¸ºçˆ¶ç»“ç‚¹
 	int temp = arr[j];
 	while (i>=0)
 	{
 		if (arr[i] < temp)
 		{
-			arr[j] = arr[i];  //½ÏĞ¡ÔªËØÏÂÒÆ
+			arr[j] = arr[i];  //è¾ƒå°å…ƒç´ ä¸‹ç§»
 			j = i;
-			i = (j-1)/2; //µü´úÏÂ±êÉÏÒÆ£¬ siftup
+			i = (j-1)/2; //è¿­ä»£ä¸‹æ ‡ä¸Šç§»ï¼Œ siftup
 		}
 		else break;
 	}
-	arr[j] = temp; //»ØËÍ
+	arr[j] = temp; //å›é€
 }
-//µİ¹é
-void siftup2(int arr[], int son) 
+//é€’å½’
+void siftup2(int arr[], int son)
 {
 	int j = son;
-	int i = (j-1)/2; //i Îª¸¸½áµã
+	int i = (j-1)/2; //i ä¸ºçˆ¶ç»“ç‚¹
 	if (i >=0 && arr[i]<arr[j])
 	{
 		swap(arr[i], arr[j]);
@@ -69,16 +69,16 @@ void siftup2(int arr[], int son)
 	}
 }
 
-//×î´ó¶Ñ£¬¶ÑÎ²²åÈëÔªËØ
-//²»¿¼ÂÇ¿Õ¼ä²»×ãµÄÇé¿ö
+//æœ€å¤§å †ï¼Œå †å°¾æ’å…¥å…ƒç´ 
+//ä¸è€ƒè™‘ç©ºé—´ä¸è¶³çš„æƒ…å†µ
 void insert(int arr[], int size, int x)
 {
 	arr[size] = x;
-	siftup(arr, size); 
+	siftup(arr, size);
 	size++;
 }
 
-//×î´ó¶ÑÉ¾³ı£¬É¾³ı¶Ñ¶¥ÔªËØ
+//æœ€å¤§å †åˆ é™¤ï¼Œåˆ é™¤å †é¡¶å…ƒç´ 
 void remove(int arr[], int size)
 {
 	if (size<=0) return;
@@ -90,11 +90,11 @@ void remove(int arr[], int size)
 // main function to do heap sort
 void heapSort(int arr[], int n)
 {
-	//case1: right = 2*i + 2(Å¼Êı) = n - 1 , -> i = (n-2)/2, n ÎªÆæÊıÏÂÈ¡Õû£¬ 
-	//case2: left = 2*i + 1(ÆæÊı) = n-1, i = (n-2)/2, nÎªÅ¼Êı, ËùÒÔcase1,2¾ùÂú×ã i = (n-2)/2
-	
+	//case1: right = 2*i + 2(å¶æ•°) = n - 1 , -> i = (n-2)/2, n ä¸ºå¥‡æ•°ä¸‹å–æ•´ï¼Œ
+	//case2: left = 2*i + 1(å¥‡æ•°) = n-1, i = (n-2)/2, nä¸ºå¶æ•°, æ‰€ä»¥case1,2å‡æ»¡è¶³ i = (n-2)/2
+
 	// Build max heap (rearrange array) by using siftdown method
-	for (int i = n / 2 - 1; i >= 0; i--) 
+	for (int i = n / 2 - 1; i >= 0; i--)
 		heapify(arr, n, i);
 
 	// One by one extract an element from heap
@@ -104,7 +104,7 @@ void heapSort(int arr[], int n)
 		swap(arr[0], arr[i]);
 
 		// call max heapify on the reduced heap
-		//Ëõ¼õµ÷Õû·¶Î§£¬Ä©Î²ÅÅºÃĞòµÄÔªËØ²»µ÷Õû 
+		//ç¼©å‡è°ƒæ•´èŒƒå›´ï¼Œæœ«å°¾æ’å¥½åºçš„å…ƒç´ ä¸è°ƒæ•´
 		heapify(arr, i, 0);
 	}
 }

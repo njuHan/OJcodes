@@ -6,8 +6,8 @@
 #include<unordered_map>
 using namespace std;
 
-//Ò»¶ÑÖ½Ëæ»úÕı·´ÃæÏòÉÏ£¬Ã¿´ÎÖ»ÄÜ·­¶¯×îÉÏÃækÕÅÖ½£¬È«²¿ÕıÃæÏòÉÏĞèÒª¶àÉÙ´Î·­¶¯
-//1:ÕıÃæÏòÉÏ£¬0·´Ãæ
+//ä¸€å †çº¸éšæœºæ­£åé¢å‘ä¸Šï¼Œæ¯æ¬¡åªèƒ½ç¿»åŠ¨æœ€ä¸Šé¢kå¼ çº¸ï¼Œå…¨éƒ¨æ­£é¢å‘ä¸Šéœ€è¦å¤šå°‘æ¬¡ç¿»åŠ¨
+//1:æ­£é¢å‘ä¸Šï¼Œ0åé¢
 int func(vector<int> paper)
 {
 	int n = paper.size();
@@ -19,7 +19,7 @@ int func(vector<int> paper)
 		if (paper[i] != state)
 		{
 			state = paper[i];
-			ans++; //²»Í¬¶Î¼ÓÒ»
+			ans++; //ä¸åŒæ®µåŠ ä¸€
 		}
 	}
 	return paper[n - 1] == 1 ? ans - 1 : ans;

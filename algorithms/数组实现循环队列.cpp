@@ -52,14 +52,14 @@ public:
 		x = elements[front];
 		return true;
 	}
-	friend ostream& operator << (ostream& os, SeqQueue<T>& q) //±ØĞëÓÑÔªº¯Êı
+	friend ostream& operator << (ostream& os, SeqQueue<T>& q) //å¿…é¡»å‹å…ƒå‡½æ•°
 	{
 		os << "front = " << q.front << ", rear = " << q.rear << endl;
 		for (int i = q.front; i != q.rear; i = (i + 1) % q.maxsize)
 			os << i << ":" << q.elements[i] << endl;
 		return os;
 	}
-	
+
 };
 
 

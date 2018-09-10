@@ -5,14 +5,14 @@
 #include<time.h>
 
 
-// tm½á¹¹ÌåÖĞµÄÄêÊÇµ±Ç°ÄêÓë1900ÄêµÄ²îÖµ£¬ÔÂ·İÊÇ´Ó0µ½11£¬0´ú±í1ÔÂ£¬11ÔÂ´ú±í12¡£
+// tmç»“æ„ä½“ä¸­çš„å¹´æ˜¯å½“å‰å¹´ä¸1900å¹´çš„å·®å€¼ï¼Œæœˆä»½æ˜¯ä»0åˆ°11ï¼Œ0ä»£è¡¨1æœˆï¼Œ11æœˆä»£è¡¨12ã€‚
 time_t convert(int year, int month, int day)
 {
 	tm info = { 0 };
-	info.tm_year = year - 1900;  //Äê·İ -1900
-	info.tm_mon = month - 1; //ÔÂ·İ -1
+	info.tm_year = year - 1900;  //å¹´ä»½ -1900
+	info.tm_mon = month - 1; //æœˆä»½ -1
 	info.tm_mday = day;
-	return mktime(&info); //ÕâÀï´«Ö¸Õë
+	return mktime(&info); //è¿™é‡Œä¼ æŒ‡é’ˆ
 }
 
 int  get_days(const char* from, const char* to)

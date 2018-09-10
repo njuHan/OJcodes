@@ -15,8 +15,8 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {}
 };
 
-//Ã¿¸ôn¸öÔªËØ·´×ª£¬ n=k
-void reverseN(ListNode** head, int k) //±ØÐëÊ¹ÓÃÖ¸ÕëµÄÖ¸Õë
+//æ¯éš”nä¸ªå…ƒç´ åè½¬ï¼Œ n=k
+void reverseN(ListNode** head, int k) //å¿…é¡»ä½¿ç”¨æŒ‡é’ˆçš„æŒ‡é’ˆ
 {
 	if (k == 1 || *head == NULL) return;
 	ListNode** pp = head, **ppnext = &((*head)->next);

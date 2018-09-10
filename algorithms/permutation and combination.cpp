@@ -6,14 +6,14 @@ using namespace std;
 // permutation and combination
 const int maxn = 10;
 const int mod = 1000000007;
-//¶¨Òå¼ÆËãc(n,r) = n!/r!/(n-r)! = (r+1) * ... *n/ (1 * ... * n-r)
+//å®šä¹‰è®¡ç®—c(n,r) = n!/r!/(n-r)! = (r+1) * ... *n/ (1 * ... * n-r)
 long long comb1(int n, int r)
 {
 	if (n < r) swap(n, r);
 	r = r < n - r ? n - r : r;
 	long long ans = 1;
 	int i = r + 1, j = 1;
-	while (i <= n ) // (i <= n && j <= n - r) : i,jµÄ³¤¶ÈÒ»ÑùµÄ n-(r+1), n-r-1
+	while (i <= n ) // (i <= n && j <= n - r) : i,jçš„é•¿åº¦ä¸€æ ·çš„ n-(r+1), n-r-1
 	{
 		ans = ans * i++;
 		ans = ans / j++;
@@ -21,7 +21,7 @@ long long comb1(int n, int r)
 	return ans;
 }
 
-//µÝÍÆ¼ÆËã²¢´æ´¢×éºÏÊý
+//é€’æŽ¨è®¡ç®—å¹¶å­˜å‚¨ç»„åˆæ•°
 // c(n,r) = c(n-1,r) + c(n-1, r-1)
 long long comb[maxn][maxn];
 void getComb()
@@ -32,17 +32,17 @@ void getComb()
 		for (int r = 1; r < n; r++)
 		{
 			comb[n][r] = comb[n - 1][r] + comb[n - 1][r - 1];
-			// comb[n][r] %= mod; //·ÀÒç³öÈ¡Ä£
+			// comb[n][r] %= mod; //é˜²æº¢å‡ºå–æ¨¡
 		}
 	}
 }
 
-void getComb2() 
+void getComb2()
 {
-	for (int i = 0; i < maxn; i++) 
+	for (int i = 0; i < maxn; i++)
 	{
 		comb[i][0] = comb[i][i] = 1;
-		for (int j = 1; j < i; j++) 
+		for (int j = 1; j < i; j++)
 		{
 			comb[i][j] = comb[i - 1][j] + comb[i - 1][j - 1];
 		}
@@ -50,9 +50,9 @@ void getComb2()
 }
 
 
-// ÅÅÁÐ£º
+// æŽ’åˆ—ï¼š
 long long permutation[maxn][maxn];
-//¶¨Òå¼ÆËãA(n,r) = n!/(n-r)!;
+//å®šä¹‰è®¡ç®—A(n,r) = n!/(n-r)!;
 long long permu(int n, int r)
 {
 	if (n < r) swap(n, r);
@@ -62,14 +62,14 @@ long long permu(int n, int r)
 	return ans;
 }
 
-//µÝÍÆ A(n,r) = A(n-1, r) + r*A(n-1,r-1)
+//é€’æŽ¨ A(n,r) = A(n-1, r) + r*A(n-1,r-1)
 long long permus[maxn][maxn];
 void getPermus()
 {
 	for (int n = 0; n < maxn; n++)
 	{
 		permus[n][0] = 1;
-		for (int r = 1; r <= n; r++) //×¢ÒâA(n,n)Òªµ¥¶ÀÌÖÂÛ
+		for (int r = 1; r <= n; r++) //æ³¨æ„A(n,n)è¦å•ç‹¬è®¨è®º
 		{
 			if (r == n) //A(n,n) = n*A(n-1,n-1);
 				permus[n][r] = r*permus[n - 1][r - 1];

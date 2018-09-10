@@ -14,49 +14,49 @@
 using namespace std;
 
 
-//ÎªÔËËãÊµÏÖ¼Ó·¨
+//ä¸ºè¿ç®—å®ç°åŠ æ³•
 int add(int a, int b)
 {
 	if (b == 0) return a;
 	int sum, carry;
-	sum = a^b; //Ã»ÓĞ½øÎ»µÄ¼Ó·¨
-	carry = (a&b) << 1; //ÓĞ½øÎ»µÄ¼Ó·¨,×¢ÒâÀ¨ºÅ
+	sum = a^b; //æ²¡æœ‰è¿›ä½çš„åŠ æ³•
+	carry = (a&b) << 1; //æœ‰è¿›ä½çš„åŠ æ³•,æ³¨æ„æ‹¬å·
 	return add(sum, carry);
 }
 
-//¼õ·¨£º
-//¼õ·¨×ª»¯Îª¼Ó·¨£ºa - b = a + (-b) = a + (~b + 1 )
+//å‡æ³•ï¼š
+//å‡æ³•è½¬åŒ–ä¸ºåŠ æ³•ï¼ša - b = a + (-b) = a + (~b + 1 )
 int sub(int a, int b)
 {
 	return add(a, add(~b, 1));
 }
 
-//³Ë³ı·¨ÖĞ³öÏÖµÄ¼Ó¼õ¿ÉÒÔÓÃadd,sub´úÌæ
-//³Ë·¨
+//ä¹˜é™¤æ³•ä¸­å‡ºç°çš„åŠ å‡å¯ä»¥ç”¨add,subä»£æ›¿
+//ä¹˜æ³•
 int muti(int a, int b)
 {
 	bool nega = (b < 0);
-	if (nega) b = -b; //Ê¹µÃ b ÎªÕıÊı
+	if (nega) b = -b; //ä½¿å¾— b ä¸ºæ­£æ•°
 	unordered_map<int, int> shift;
 	for (int i = 0; i < 32; i++)
 	{
 		shift[1 << i] = i;
 	}
 	int sum = 0;
-	while (b > 0) //±éÀú b µÄ¶ş½øÖÆ1
+	while (b > 0) //éå† b çš„äºŒè¿›åˆ¶1
 	{
-		//int last = b&(~b + 1); //È¡³ö×îºóÒ»¸ö1£¬add
+		//int last = b&(~b + 1); //å–å‡ºæœ€åä¸€ä¸ª1ï¼Œadd
 		int last = b&(-b); //-b == (~b+1)
 		int temp = shift[last];
-		sum = sum + (a << temp); //¸ÄÎª add()
-		b = b&(b - 1); //ÏûÈ¥×îºóÒ»¸ö1£¬ sub
+		sum = sum + (a << temp); //æ”¹ä¸º add()
+		b = b&(b - 1); //æ¶ˆå»æœ€åä¸€ä¸ª1ï¼Œ sub
 	}
 	if (nega) return -sum;
 	else return sum;
 }
 
-//³ı·¨
-//×¢ÒâintÒç³ö https://leetcode.com/problems/divide-two-integers/description/
+//é™¤æ³•
+//æ³¨æ„intæº¢å‡º https://leetcode.com/problems/divide-two-integers/description/
 int mydiv(int dividend, int divisor)
 {
 	long long a = dividend, b = divisor, res = 0, one = 1;
@@ -73,7 +73,7 @@ int mydiv(int dividend, int divisor)
 	for (int i = msb; i >= 0; i--)
 	{
 		if ((b << i) > a) continue;
-		res = res | (one << i); //ÕâÀïÈôÓÃ(1<<i) µ±i==31Ê±£¬±ä³É¸ºÊı
+		res = res | (one << i); //è¿™é‡Œè‹¥ç”¨(1<<i) å½“i==31æ—¶ï¼Œå˜æˆè´Ÿæ•°
 		a = a - (b << i);
 	}
 	//if (nega) return -res;

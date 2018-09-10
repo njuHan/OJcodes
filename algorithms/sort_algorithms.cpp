@@ -82,34 +82,34 @@ void instSortR(int a[], int n)
 
 
 /*
-Ï£¶ûÅÅĞò
-¶ÔÓÚ´ó¹æÄ£µÄÊı×é£¬²åÈëÅÅĞòºÜÂı£¬ÒòÎªËüÖ»ÄÜ½»»»ÏàÁÚµÄÔªËØ£¬Ã¿´ÎÖ»ÄÜ½«ÄæĞò
-ÊıÁ¿¼õÉÙ 1¡£
-Ï£¶ûÅÅĞòµÄ³öÏÖ¾ÍÊÇÎªÁË¸Ä½ø²åÈëÅÅĞòµÄÕâÖÖ¾ÖÏŞĞÔ£¬ËüÍ¨¹ı½»»»²»ÏàÁÚµÄÔªËØ£¬
-Ã¿´Î¿ÉÒÔ½«ÄæĞòÊıÁ¿¼õÉÙ´óÓÚ 1¡£
-Ï£¶ûÅÅĞòÊ¹ÓÃ²åÈëÅÅĞò¶Ô¼ä¸ô h µÄĞòÁĞ½øĞĞÅÅĞò¡£Í¨¹ı²»¶Ï¼õĞ¡ h£¬×îºóÁî h=1£¬
-¾Í¿ÉÒÔÊ¹µÃÕû¸öÊı×éÊÇÓĞĞòµÄ¡£
+å¸Œå°”æ’åº
+å¯¹äºå¤§è§„æ¨¡çš„æ•°ç»„ï¼Œæ’å…¥æ’åºå¾ˆæ…¢ï¼Œå› ä¸ºå®ƒåªèƒ½äº¤æ¢ç›¸é‚»çš„å…ƒç´ ï¼Œæ¯æ¬¡åªèƒ½å°†é€†åº
+æ•°é‡å‡å°‘ 1ã€‚
+å¸Œå°”æ’åºçš„å‡ºç°å°±æ˜¯ä¸ºäº†æ”¹è¿›æ’å…¥æ’åºçš„è¿™ç§å±€é™æ€§ï¼Œå®ƒé€šè¿‡äº¤æ¢ä¸ç›¸é‚»çš„å…ƒç´ ï¼Œ
+æ¯æ¬¡å¯ä»¥å°†é€†åºæ•°é‡å‡å°‘å¤§äº 1ã€‚
+å¸Œå°”æ’åºä½¿ç”¨æ’å…¥æ’åºå¯¹é—´éš” h çš„åºåˆ—è¿›è¡Œæ’åºã€‚é€šè¿‡ä¸æ–­å‡å° hï¼Œæœ€åä»¤ h=1ï¼Œ
+å°±å¯ä»¥ä½¿å¾—æ•´ä¸ªæ•°ç»„æ˜¯æœ‰åºçš„ã€‚
 */
-void shellSort(vector<int>& nums) 
+void shellSort(vector<int>& nums)
 {
 	int N = nums.size();
 	int h = 1;
 	while (h < N / 3)
 		h = 3 * h + 1; // 1, 4, 13, 40, ...
-	while (h >= 1) 
+	while (h >= 1)
 	{
 		for (int i = h; i < N; i++)
-			for (int j = i; j >= h && nums[j]< nums[j -h]; j -= h) //ÕâÀïºÍ²åÈëÅÅĞòÀàËÆ
+			for (int j = i; j >= h && nums[j]< nums[j -h]; j -= h) //è¿™é‡Œå’Œæ’å…¥æ’åºç±»ä¼¼
 				swap(nums[j], nums[j - h]);
 		h = h / 3;
 	}
 }
 
 /*
-Ñ¡ÔñÅÅĞò
-Ñ¡Ôñ³öÊı×éÖĞµÄ×îĞ¡ÔªËØ£¬½«ËüÓëÊı×éµÄµÚÒ»¸öÔªËØ½»»»Î»ÖÃ¡£ÔÙ´ÓÊ£ÏÂµÄÔªËØÖĞ
-Ñ¡Ôñ³ö×îĞ¡µÄÔªËØ£¬½«ËüÓëÊı×éµÄµÚ¶ş¸öÔªËØ½»»»Î»ÖÃ¡£²»¶Ï½øĞĞÕâÑùµÄ²Ù×÷£¬Ö±
-µ½½«Õû¸öÊı×éÅÅĞò¡£
+é€‰æ‹©æ’åº
+é€‰æ‹©å‡ºæ•°ç»„ä¸­çš„æœ€å°å…ƒç´ ï¼Œå°†å®ƒä¸æ•°ç»„çš„ç¬¬ä¸€ä¸ªå…ƒç´ äº¤æ¢ä½ç½®ã€‚å†ä»å‰©ä¸‹çš„å…ƒç´ ä¸­
+é€‰æ‹©å‡ºæœ€å°çš„å…ƒç´ ï¼Œå°†å®ƒä¸æ•°ç»„çš„ç¬¬äºŒä¸ªå…ƒç´ äº¤æ¢ä½ç½®ã€‚ä¸æ–­è¿›è¡Œè¿™æ ·çš„æ“ä½œï¼Œç›´
+åˆ°å°†æ•´ä¸ªæ•°ç»„æ’åºã€‚
 */
 void selectSort(vector<int>& nums)
 {
@@ -126,17 +126,17 @@ void selectSort(vector<int>& nums)
 
 //merge the sorted two vec: [i,mid), [mid, j)
 // and store the result in vec
-//×ó±ÕÓÒ¿ªĞ´ÆğÀ´·½±ã
+//å·¦é—­å³å¼€å†™èµ·æ¥æ–¹ä¾¿
 void merge(vector<int>& vec, int i, int mid, int j)
 {
 	cout << i << "," << mid << "," << j << endl;
-	// [vec[i], vec[mid]) ×ó±ÕÓÒ¿ª
+	// [vec[i], vec[mid]) å·¦é—­å³å¼€
 	/*
-	²»ÄÜĞ´³É£º
+	ä¸èƒ½å†™æˆï¼š
 	vector<int> v1(&vec[i], &vec[mid]);
 	vector<int> v2(&vec[mid], &vec[j]);
-	µ±j==nÊ±£¬vec[j]Ô½½ç¡£
-	µ«ÊÇstring×Ö·û´®¿ÉÒÔĞ´ &str[n], ÒòÎªÄ©Î²¼ÓÁË0
+	å½“j==næ—¶ï¼Œvec[j]è¶Šç•Œã€‚
+	ä½†æ˜¯stringå­—ç¬¦ä¸²å¯ä»¥å†™ &str[n], å› ä¸ºæœ«å°¾åŠ äº†0
 	*/
 	vector<int> v1(vec.begin()+i, vec.begin()+mid);
 	vector<int> v2(vec.begin()+mid, vec.begin()+j);
@@ -144,7 +144,7 @@ void merge(vector<int>& vec, int i, int mid, int j)
 	int k = i, p = 0, q = 0;
 	while (p < len1 || q < len2)
 	{
-		// ´Óv1ÖĞÑ¡È¡
+		// ä»v1ä¸­é€‰å–
 		if (q >= len2 || (p < len1 && v1[p] <= v2[q]))
 		{
 			vec[k++] = v1[p++];
@@ -155,7 +155,7 @@ void merge(vector<int>& vec, int i, int mid, int j)
 		}
 	}
 }
-//µİ¹émerge sort ×Ô¶¥ÏòÏÂ
+//é€’å½’merge sort è‡ªé¡¶å‘ä¸‹
 void mergeSort(vector<int>& vec, int i, int j) //[i, j)
 {
 	if (j - i>1)
@@ -170,9 +170,9 @@ void mergeSort(vector<int>& vec, int i, int j) //[i, j)
 //--------------------------------------------------------------------
 /*
  Iterative Merge Sort
- ×Ôµ×ÏòÉÏ
+ è‡ªåº•å‘ä¸Š
 */
-void mergeSort(vector<int>& nums) 
+void mergeSort(vector<int>& nums)
 {
 	int n = nums.size();
 	for (int sz = 1; sz < n; sz += sz)
@@ -218,7 +218,7 @@ int split(int a[], int first, int last)
 	return pos;
 }
 
-//×ó±ÕÓÒ¿ªÇø¼ä[begin, end)
+//å·¦é—­å³å¼€åŒºé—´[begin, end)
 int split(int* a, int begin, int end)
 {
 	int val = a[begin];
@@ -237,7 +237,7 @@ void quickSort(int* a, int x, int y) //[x,y)
 	{
 		int m = split(a, x, y);
 		quickSort(a, x, m);
-		quickSort(a, m + 1, y);//×¢ÒâÕâÀïÅÅ³ım£¬ºÍ¹é²¢ÅÅĞò²»Ò»Ñù
+		quickSort(a, m + 1, y);//æ³¨æ„è¿™é‡Œæ’é™¤mï¼Œå’Œå½’å¹¶æ’åºä¸ä¸€æ ·
 	}
 }
 
@@ -248,7 +248,7 @@ heap sort
 */
 // To heapify a subtree rooted with node i which is
 // an index in arr[]. n is size of heap
-void heapify(int arr[], int n, int i) //iÎª¸ù½áµã, siftdown
+void heapify(int arr[], int n, int i) //iä¸ºæ ¹ç»“ç‚¹, siftdown
 {
 	int largest = i;  // Initialize largest as root
 	int l = 2 * i + 1;  // left = 2*i + 1
@@ -272,28 +272,28 @@ void heapify(int arr[], int n, int i) //iÎª¸ù½áµã, siftdown
 	}
 }
 //max heap
-//µü´ú
-void siftdown(int arr[], int n, int i) //iÎª¸ù½áµã, siftdown
+//è¿­ä»£
+void siftdown(int arr[], int n, int i) //iä¸ºæ ¹ç»“ç‚¹, siftdown
 {
 	int largest = i;  // Initialize largest as root
 	int j = 2 * i + 1;  // left = 2*i + 1
-	int temp = arr[i]; //µ÷ÕûµÄÔªËØÒ»Ö±¶¼ÊÇ temp
+	int temp = arr[i]; //è°ƒæ•´çš„å…ƒç´ ä¸€ç›´éƒ½æ˜¯ temp
 	while (j<n)
 	{
-		if (j+1<n && arr[j+1] > arr[j]) j++; //Ö¸Ïò½Ï´óµÄ×Ó½áµã
+		if (j+1<n && arr[j+1] > arr[j]) j++; //æŒ‡å‘è¾ƒå¤§çš„å­ç»“ç‚¹
 		if (temp <arr[j] ) {arr[i] =  arr[j]; i = j; j = 2*i + 1;}
 		else break;
 	}
-	arr[i] = temp; //µ÷Õû½áÊø£¬ »ØËÍtemp
+	arr[i] = temp; //è°ƒæ•´ç»“æŸï¼Œ å›é€temp
 }
 
 // main function to do heap sort
 void heapSort(int arr[], int n)
 {
-	//case1: right = 2*i + 2(Å¼Êı) = n - 1 , -> i = (n-2)/2, n ÎªÆæÊıÏÂÈ¡Õû£¬ 
-	//case2: left = 2*i + 1(ÆæÊı) = n-1, i = (n-2)/2, nÎªÅ¼Êı, ËùÒÔcase1,2¾ùÂú×ã i = (n-2)/2
+	//case1: right = 2*i + 2(å¶æ•°) = n - 1 , -> i = (n-2)/2, n ä¸ºå¥‡æ•°ä¸‹å–æ•´ï¼Œ
+	//case2: left = 2*i + 1(å¥‡æ•°) = n-1, i = (n-2)/2, nä¸ºå¶æ•°, æ‰€ä»¥case1,2å‡æ»¡è¶³ i = (n-2)/2
 	// Build max heap (rearrange array)
-	for (int i = n / 2 - 1; i >= 0; i--) 
+	for (int i = n / 2 - 1; i >= 0; i--)
 		heapify(arr, n, i);
 
 	// One by one extract an element from heap

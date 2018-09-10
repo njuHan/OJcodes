@@ -17,11 +17,11 @@ const int maxn = 100;
 int c[maxn];
 int a[maxn][maxn];
 /*
-×éºÏÊı£º
+ç»„åˆæ•°ï¼š
 c(n,k) = c(n,k-1) * (n-k+1)/k
 */
-//Ñî»ÔÈı½Ç
-//O(n*n):¶şÎ¬Êı×é¼ÆËã£¬ 
+//æ¨è¾‰ä¸‰è§’
+//O(n*n):äºŒç»´æ•°ç»„è®¡ç®—ï¼Œ
 void getn2(int n)
 {
 	for (int i = 0; i <= n; i++)
@@ -32,7 +32,7 @@ void getn2(int n)
 	}
 }
 
-//O(n):¼ÆËãµÚ n ĞĞÏµÊı
+//O(n):è®¡ç®—ç¬¬ n è¡Œç³»æ•°
 //c(n,k) = c(n,k-1) * (n-k+1)/k
 
 void getn(int n)

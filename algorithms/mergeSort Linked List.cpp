@@ -15,12 +15,12 @@ ListNode* sortList(ListNode* head) {
 	if (head == NULL || head->next == NULL) return head;
 	ListNode* slow = head;
 	ListNode* fast = head->next;
-	while (fast && fast->next) //ÕÒµ½Á´±íÖÐ¼ä
+	while (fast && fast->next) //æ‰¾åˆ°é“¾è¡¨ä¸­é—´
 	{
 		fast = fast->next->next;
 		slow = slow->next;
 	}
-	ListNode* head2 = slow->next; //µÚ¶þ¶ÎÁ´±íµÄÍ·½áµã
+	ListNode* head2 = slow->next; //ç¬¬äºŒæ®µé“¾è¡¨çš„å¤´ç»“ç‚¹
 	slow->next = NULL;
 	ListNode* ans = merge(sortList(head), sortList(head2));
 	return ans;

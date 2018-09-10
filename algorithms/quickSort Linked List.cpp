@@ -3,7 +3,7 @@
 #include<vector>
 using namespace std;
 
-// reference£º https://stackoverflow.com/questions/14805936/optimal-quicksort-for-single-linked-list
+// referenceï¼š https://stackoverflow.com/questions/14805936/optimal-quicksort-for-single-linked-list
 
 struct ListNode {
 	int val;
@@ -31,8 +31,8 @@ void qs(ListNode * hd, ListNode * tl, ListNode ** rtn)
 		p = hd->next;
 
 		/* Start optimization for O(n) behavior on sorted and reverse-of-sorted lists */
-		//Èç¹ûÊÇÄæÐò£¬·´×ªÁ´±í
-		//Èç¹ûÕýÐò£¬¾­¹ýpartition ºó±äÎªÄæÐò(hi)
+		//å¦‚æžœæ˜¯é€†åºï¼Œåè½¬é“¾è¡¨
+		//å¦‚æžœæ­£åºï¼Œç»è¿‡partition åŽå˜ä¸ºé€†åº(hi)
 		while (p != NULL && LEQ(p, hd)) {
 			hd->next = hi;
 			hi = hd;
@@ -75,8 +75,8 @@ void qs(ListNode * hd, ListNode * tl, ListNode ** rtn)
 			hd = hi;        /* Eliminated tail-recursive call. */
 		}
 		else {
-			qs(hi, tl, &hd->next);  //ÏÈÅÅÐò½Ï´óÊýµÄsublist
-			tl = hd;       //½ÓÏÂÀ´×¼±¸ÅÅÐòÐ¡Êýsublist£¬ ÉèÖÃ tail = hd, hd = lo
+			qs(hi, tl, &hd->next);  //å…ˆæŽ’åºè¾ƒå¤§æ•°çš„sublist
+			tl = hd;       //æŽ¥ä¸‹æ¥å‡†å¤‡æŽ’åºå°æ•°sublistï¼Œ è®¾ç½® tail = hd, hd = lo
 			hd = lo;        /* Eliminated tail-recursive call. */
 		}
 	}
@@ -97,9 +97,9 @@ void printNode(ListNode* head)
 }
 
 //rewrite
-//head : ´ýÅÅÐòÁ´±íµÄÍ·
-//tail: ´ýÅÅÐòÁ´±í×îºóÒ»¸ö½áµãµÄÏÂÒ»¸ö½áµã
-//¶þ¼¶Ö¸Õë root: *root == ÅÅÐòºóµÄÁ´±íÍ·
+//head : å¾…æŽ’åºé“¾è¡¨çš„å¤´
+//tail: å¾…æŽ’åºé“¾è¡¨æœ€åŽä¸€ä¸ªç»“ç‚¹çš„ä¸‹ä¸€ä¸ªç»“ç‚¹
+//äºŒçº§æŒ‡é’ˆ root: *root == æŽ’åºåŽçš„é“¾è¡¨å¤´
 void quickSort(ListNode* head, ListNode* tail, ListNode** root)
 {
 	ListNode *p, *q, *hi, *lo;
@@ -112,8 +112,8 @@ void quickSort(ListNode* head, ListNode* tail, ListNode** root)
 		p = head->next;
 
 		/* Start optimization for O(n) behavior on sorted and reverse-of-sorted lists */
-		//Èç¹ûÊÇÄæÐò£¬·´×ªÁ´±í
-		//Èç¹ûÕýÐò£¬¾­¹ýpartition ºó±äÎªÄæÐò(hi)
+		//å¦‚æžœæ˜¯é€†åºï¼Œåè½¬é“¾è¡¨
+		//å¦‚æžœæ­£åºï¼Œç»è¿‡partition åŽå˜ä¸ºé€†åº(hi)
 		while (p != NULL && LEQ(p, head)) {
 			head->next = hi;
 			hi = head;
@@ -123,15 +123,15 @@ void quickSort(ListNode* head, ListNode* tail, ListNode** root)
 		}
 
 		/* If entire list was ascending, done. */
-		// ´ËÊ±Ïàµ±ÓÚ°ÑÁ´±í·´×ª£¬ÔÙ´¦Àíhead ºÍ tail
-		// Ò²ÄÜcover Ö»ÓÐÒ»¸ö½áµãµÄÇé¿ö(head->next == NULL)
+		// æ­¤æ—¶ç›¸å½“äºŽæŠŠé“¾è¡¨åè½¬ï¼Œå†å¤„ç†head å’Œ tail
+		// ä¹Ÿèƒ½cover åªæœ‰ä¸€ä¸ªç»“ç‚¹çš„æƒ…å†µ(head->next == NULL)
 		if (p == NULL) {
 			*root = head;
 			head->next = hi;
 			q->next = tail;
 			return;
 		}
-		//Õâ¶ÎÓÅ»¯ºÜÖØÒª£¬https://leetcode.com/problems/sort-list/description/ 864ms -> 46ms
+		//è¿™æ®µä¼˜åŒ–å¾ˆé‡è¦ï¼Œhttps://leetcode.com/problems/sort-list/description/ 864ms -> 46ms
 		/* End optimization.  Can be deleted if desired. */
 
 		//partition

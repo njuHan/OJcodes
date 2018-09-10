@@ -13,8 +13,8 @@ const int maxn = 100;
 int a[maxn];
 //sum a[l] + ... + a[r]
 
-//O(n*n) 
-//S[i] = a[0]+...+a[i-1], ´Ó0¿ªÊ¼Á¬Ğøi¸öÔªËØ
+//O(n*n)
+//S[i] = a[0]+...+a[i-1], ä»0å¼€å§‹è¿ç»­iä¸ªå…ƒç´ 
 int s[maxn];
 int maxsum(int l, int r)
 {
@@ -27,18 +27,18 @@ int maxsum(int l, int r)
 	return sum;
 }
 
-//¶ş·Öµİ¹é O(nlogn)
-int maxsum(int l, int r) //×ó±ÕÓÒ¿ªÇø¼ä[l,r)Çó×î´óÁ¬ĞøºÍ
+//äºŒåˆ†é€’å½’ O(nlogn)
+int maxsum(int l, int r) //å·¦é—­å³å¼€åŒºé—´[l,r)æ±‚æœ€å¤§è¿ç»­å’Œ
 {
 	if (1 == r - l) return a[l];
-	//¶ş·Ö£º
+	//äºŒåˆ†ï¼š
 	int m = l + (r - l) / 2; //[l,m) , [m, r)
 	int best = max(maxsum(l, m), maxsum(m, r));
-	//ÕÒÖĞ¼äµãmµÄ×î´óÁ¬ĞøºÍ
-	int lhs = a[m-1], rhs = a[m]; //×¢ÒâÕâÀï³õÊ¼»¯²»ÄÜÎª0,·ÀÖ¹¸ºÊıÊı×é
+	//æ‰¾ä¸­é—´ç‚¹mçš„æœ€å¤§è¿ç»­å’Œ
+	int lhs = a[m-1], rhs = a[m]; //æ³¨æ„è¿™é‡Œåˆå§‹åŒ–ä¸èƒ½ä¸º0,é˜²æ­¢è´Ÿæ•°æ•°ç»„
 	int suml=0, sumr=0;
-	//Õâ²¿·Ö¿ÉÒÔÖ»ÒªO(1)£¬ 	//https://leetcode.com/problems/maximum-subarray/discuss/20360/C++-An-clear-O(n)-divide-and-conquer-solution-with-comments
-	for (int i = m - 1; i >= l; i--) 
+	//è¿™éƒ¨åˆ†å¯ä»¥åªè¦O(1)ï¼Œ 	//https://leetcode.com/problems/maximum-subarray/discuss/20360/C++-An-clear-O(n)-divide-and-conquer-solution-with-comments
+	for (int i = m - 1; i >= l; i--)
 	{
 		lhs = max(lhs, suml += a[i]);
 	}
@@ -58,6 +58,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-
-
