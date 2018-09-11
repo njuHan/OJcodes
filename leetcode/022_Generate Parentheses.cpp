@@ -8,7 +8,7 @@ using namespace std;
 
 class Solution {
 public:
-	vector<string> generateParenthesis(int n) {
+   vector<string> generateParenthesis(int n) {
 		vector<string> ans;
 		if (n <= 0) return ans;
 		string s = "";
@@ -21,18 +21,19 @@ public:
 			ans.push_back(s);
 		else if (cur < 2*n)
 		{
-			if (diff > 0)
+            if (diff > 2*n-cur) return; //pruning
+			s.push_back('(');
+            getP(ans, s, diff + 1, cur + 1, n);
+            s.pop_back();
+            if (diff > 0)
 			{
 				s.push_back(')');
 				getP(ans, s, diff - 1, cur + 1, n);
-				s.pop_back();
 			}
-			s.push_back('(');
-			getP(ans, s, diff + 1, cur + 1, n);
+			
 		}
 
 	}
-
 };
 
 int main()

@@ -6,21 +6,20 @@ using namespace std;
 
 class Solution {
 public:
-	string longestPalindrome(string s)
+    string longestPalindrome(string s) 
 	{
 		int len = s.size();
 		if (len <= 1) return s;
-		int maxLen = 0;
-		string ans;
+		int maxLen = 0, left, right;
+		
 		for (int i = 0; i < len; i++)
 		{
-			if (maxLen >= (len - i) * 2) break; //提前结束，这一句很重要
+            if (maxLen >= (len - i) * 2) break; //提前结束
 			//选定中心点
 			char curCh = s[i];
-			// 不要搞错左/右， l/r
 			int lSame = i, rSame = i;
 			// 找到左边重复的 curCh
-			while (0 <= lSame - 1 && s[lSame - 1] == curCh)
+			while ( 0 <= lSame-1  && s[lSame-1] == curCh)
 				lSame -= 1;
 			while (rSame + 1 < len && s[rSame + 1] == curCh)
 				rSame += 1;
@@ -34,13 +33,13 @@ public:
 			if (maxLen < curLen)
 			{
 				maxLen = curLen;
-				ans = s.substr(lSame, curLen);
+				left = lSame, right = rSame;
 			}
 
 		}
-		return ans;
+		return s.substr(left, maxLen);
 	}
-
+	
 };
 
 int main()
