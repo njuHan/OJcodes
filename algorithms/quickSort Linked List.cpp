@@ -180,7 +180,6 @@ void quickSort(ListNode* head, ListNode* tail, ListNode** phead)
 	{
 		nhi = nlo = 0;
 		hi = lo = NULL;
-		q = head;
 		p = head->next;
 
 		//partition, 比较 p 和 head 的大小
