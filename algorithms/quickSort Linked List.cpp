@@ -168,7 +168,56 @@ void quickSort(ListNode* head, ListNode* tail, ListNode** root)
 	*root = tail;
 }
 
+//无优化版
+//head : 待排序链表的头
+//tail: 待排序链表最后一个结点的下一个结点
+//二级指针 phead: *phead == 排序后的链表头
+void quickSort(ListNode* head, ListNode* tail, ListNode** phead)
+{
+	ListNode *p, *q, *hi, *lo;
+	int nhi, nlo;
+	while (head)
+	{
+		nhi = nlo = 0;
+		hi = lo = NULL;
+		q = head;
+		p = head->next;
 
+		//partition, 比较 p 和 head 的大小
+		while (p)
+		{
+			q = p->next;
+			if (LEQ(p, head))
+			{
+				p->next = lo;
+				lo = p;
+				nlo++;
+			}
+			else
+			{
+				p->next = hi;
+				hi = p;
+				nhi++;
+			}
+			p = q;
+		}
+		if (nlo < nhi)
+		{
+			quickSort(lo, head, phead);
+			phead = &head->next;
+			head = hi;
+		}
+		else
+		{
+			//只有一个head结点时 (nlo==nhi==0)，也进入该语句块
+			quickSort(hi, tail, &head->next);
+			tail = head;
+			head = lo;
+		}
+	}
+	//最终 head == NULL, 把下一段链表的头(tail)放到 phead 上
+	*phead = tail;
+}
 
 int main()
 {
