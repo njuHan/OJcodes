@@ -18,7 +18,7 @@ public:
 	{
 		if (num2 == 0) return num1;
 		int a = num1^num2;
-		int num2 = (num1&num2) << 1;
+		num2 = (num1&num2) << 1;
 		return Add(a, num2);
 	}
 };

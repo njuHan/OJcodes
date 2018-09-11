@@ -70,6 +70,8 @@ int mydiv(int dividend, int divisor)
 	{
 		msb++;
 	}
+	// a = b * res
+	// 把 res 分成多个2进制位的和: res = res | (one << i);
 	for (int i = msb; i >= 0; i--)
 	{
 		if ((b << i) > a) continue;
