@@ -62,6 +62,7 @@ public:
 		delete []p;
 		return Temp::getSum();
 	}
+	// && 短路运算
 	int Sum_Solution2(int n) {
 		int ans = n;
 		n && (ans += Sum_Solution2(n - 1));
