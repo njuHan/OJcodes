@@ -27,8 +27,8 @@ public:
 		}
 		return false;
 	}
-	// ²»ÄÜÓÃ nums[idx] = -nums[idx], ÒòÎª nums[idx]¿ÉÄÜµÈÓÚ 0
-	// Ê¹ÓÃ  nums[idx] += len
+	// ä¸èƒ½ç”¨ nums[idx] = -nums[idx], å› ä¸º nums[idx]å¯èƒ½ç­‰äº 0
+	// ä½¿ç”¨  nums[idx] += len
 	bool duplicate_1(int numbers[], int length, int* duplication)
 	{
 		if (length <= 1) return false;
@@ -46,7 +46,7 @@ public:
 		return false;
 	}
 
-	//¸ÃÌâ²»±£Ö¤ÓĞÖØ¸´ÔªËØ£¬ËùÒÔleetcode287 ¿ìÂıÖ¸ÕëµÄ·½·¨²»ÊÊÓÃÓÚÕâÒ»Ìâ
+	//è¯¥é¢˜ä¸ä¿è¯æœ‰é‡å¤å…ƒç´ ï¼Œæ‰€ä»¥leetcode287 å¿«æ…¢æŒ‡é’ˆçš„æ–¹æ³•ä¸é€‚ç”¨äºè¿™ä¸€é¢˜
 	bool duplicate_2(int numbers[], int length, int* duplication) {
 		int slow = 0, fast = 0, step = 0;
 		do

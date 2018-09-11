@@ -35,8 +35,8 @@ public:
 		else
 		{
 			TreeLinkNode* parent = pNode->next, *son = pNode;
-			//ÕÒµ½µÚÒ»¸ö¸¸½Úµã£¬ÇÒpnodeÔÚ¸Ã¸¸½ÚµãµÄ×ó×ÓÊ÷
-			//»òÕßNULL
+			//æ‰¾åˆ°ç¬¬ä¸€ä¸ªçˆ¶èŠ‚ç‚¹ï¼Œä¸”pnodeåœ¨è¯¥çˆ¶èŠ‚ç‚¹çš„å·¦å­æ ‘
+			//æˆ–è€…NULL
 			while (parent && son == parent->right)
 			{
 				son = parent;
