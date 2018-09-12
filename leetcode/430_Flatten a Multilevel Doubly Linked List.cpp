@@ -62,9 +62,9 @@ public:
 				h->next->prev = h;
 				h->child = NULL;
 				Node* p = h->next;
-				while (p->next) p = p->next;
-				p->next = next;
-				if (next) next->prev = p;
+				while (p->next) p = p->next; //找到child 链表的最后一个结点
+			    p->next = next; // child 链表的最后一个结点 指向 h 的原next结点
+			    if (next) next->prev = p; //需要判断next是否NULL
 			}
 		}
 		return head;
