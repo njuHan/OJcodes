@@ -22,7 +22,9 @@ int divide(int a, int b)
 		}
 	}
 	catch (runtime_error err) {
-		cerr << "catch exception" << err.what() << endl;
+		cerr << "catch exception: " << err.what() << endl;
+		system("pause");
+		exit(1);
 	}
 	return a / b;
 }
