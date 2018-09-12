@@ -15,6 +15,7 @@ public:
             for (int i=1; i<n; i++) ans += max(0, prices[i] - prices[i-1]);
             return ans;
         }
+		// 这里的buy[i] sell[i]是指第 i 次交易，不是第 i 天. 与Best Time to Buy and Sell Stock with Cooldown的定义不同
         vector<int> buy(k+1, INT_MAX), sell(k+1, 0);
         for (int num : prices)
             for (int i=1; i<=k; i++)

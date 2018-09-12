@@ -5,6 +5,22 @@
 #include<algorithm>
 using namespace std;
 
+
+class Solution3 {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        int pft = 0, buy = INT_MAX; 
+        for (int p : prices)
+        {
+			//先买后卖
+            buy = min(p, buy);
+            pft = max(pft, p - buy);
+        }
+        return pft;
+    }
+};
+
 class Solution2 {
 public:
     int maxProfit(vector<int>& prices) {

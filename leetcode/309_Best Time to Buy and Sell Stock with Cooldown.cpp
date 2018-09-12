@@ -5,6 +5,44 @@
 #include<algorithm>
 using namespace std;
 
+
+class Solution3 {
+public:
+	int maxProfit(vector<int>& prices) {
+		int n = prices.size();
+		if (n < 2) return 0;
+        //buy[i] : 截至第 i 天的最小买入价格
+        //sell[i] : 截至第 i 天的最大卖出收益
+		vector<int> buy(n, INT_MAX), sell(n, 0);
+		buy[0] = prices[0]; buy[1] = min(prices[0], prices[1]);
+		sell[1] = max(sell[0], prices[1] - buy[0]);
+		for (int i = 2; i < n; i++)
+		{
+			buy[i] = min(buy[i - 1], prices[i] - sell[i - 2]);
+			sell[i] = max(sell[i - 1], prices[i] - buy[i - 1]);
+		}
+		return sell[n - 1];
+	}
+	// O(1) space
+	int maxProfit(vector<int>& prices) {
+		int n = prices.size();
+		if (n < 2) return 0;
+        // buy[i-2], buy[i-1], sell[i-2], sell[i-1]
+        int prebuy = INT_MAX, buy = INT_MAX, presell = 0, sell = 0;
+		for (int p : prices)
+		{
+			//buy[i] = min(buy[i - 1], prices[i] - sell[i - 2]);
+			//sell[i] = max(sell[i - 1], prices[i] - buy[i - 1]);
+            prebuy = buy;
+            buy = min(buy, p - presell); //buy[i]
+            presell = sell;
+            sell = max(sell, p - prebuy); //sell[i]
+		}
+		return sell;
+	}
+};
+
+
 class Solution2 {
 public:
 	int maxProfit(vector<int>& prices) {
