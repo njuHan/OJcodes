@@ -1,20 +1,33 @@
-#include<iostream>
-#include<cstdio>
-#include<vector>
-#include<string>
-#include<map>
-#include<unordered_map>
-#include<stack>
-#include<algorithm>
-#include<assert.h>
-using namespace std;
-
-
- struct ListNode {
+struct ListNode {
      int val;
      ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
  };
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        if (!head || k<=1) return head;
+        ListNode* temp = new ListNode(0), *pre, *pivot;
+        temp->next = head; pre = temp;
+        int cnt = 0;
+        for (ListNode* p = head; p; p = p->next) cnt++;
+        while(cnt>=k)
+        {
+            cnt -= k;
+            pivot = pre->next;
+            for (int i=1; i<k; i++)
+            {
+                ListNode* next = pivot->next;
+                pivot->next = next->next;
+                next->next = pre->next;
+                pre->next = next;
+            }
+            pre = pivot;
+        }
+        return temp->next;
+    }
+};
+
 
 class Solution {
 public:
@@ -34,8 +47,8 @@ private:
 			cnt--;
 			nexthead = nexthead->next;
 		}
-		if (cnt > 0) return; //²»×ãk£¬²»·´×ª
-		*pp = nexthead;  //Õâ¾ä±ðÍüÁË
+		if (cnt > 0) return; //ä¸è¶³kï¼Œä¸åè½¬
+		*pp = nexthead;  //å‰åŽä¸¤æ®µé¦–å°¾ç›¸è¿ž
 		while (todo!=nexthead)
 		{
 			ListNode* next = todo->next;
